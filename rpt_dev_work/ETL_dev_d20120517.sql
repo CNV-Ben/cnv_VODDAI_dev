@@ -1,0 +1,243 @@
+alter table DAI_USER.CAMPAIGN disable constraint FK_CAMPAIGN_PROGRAMMER;
+alter table DAI_USER.CAMPAIGN disable constraint PK_CAMPAIGN;
+alter table DAI_USER.CAMPAIGN disable constraint SYS_C0047969;
+alter table DAI_USER.CAMPAIGN disable constraint SYS_C0047970;
+alter table DAI_USER.CAMPAIGN disable constraint SYS_C0048006;
+alter table DAI_USER.CAMPAIGN disable constraint SYS_C0048009;
+alter table DAI_USER.CAMPAIGN disable constraint SYS_C0048011;
+alter table DAI_USER.CAMPAIGN disable constraint SYS_C0048013;
+alter table DAI_USER.CAMPAIGN disable constraint SYS_C0048016;
+alter table DAI_USER.CAMPAIGN disable constraint SYS_C0048017;
+alter table DAI_USER.CAMPAIGN_ITEM disable constraint FK_CAMPAIGNITEM_CAMPAIGN;
+alter table DAI_USER.CAMPAIGN_ITEM disable constraint FK_CAMPAIGNITEM_PDTCAT;
+alter table DAI_USER.CAMPAIGN_ITEM disable constraint PK_CAMPAIGN_ITEM;
+alter table DAI_USER.CAMPAIGN_ITEM disable constraint SYS_C0048027;
+alter table DAI_USER.CAMPAIGN_ITEM disable constraint SYS_C0048028;
+alter table DAI_USER.CAMPAIGN_ITEM disable constraint SYS_C0048029;
+alter table DAI_USER.CAMPAIGN_ITEM disable constraint SYS_C0048030;
+alter table DAI_USER.CAMPAIGN_ITEM disable constraint SYS_C0048031;
+alter table DAI_USER.CAMPAIGN_ITEM disable constraint SYS_C0048032;
+alter table DAI_USER.CAMPAIGN_ITEM disable constraint SYS_C0048033;
+alter table DAI_USER.CAMPAIGN_ITEM disable constraint SYS_C0048034;
+alter table DAI_USER.CAMPAIGN_ITEM disable constraint SYS_C0048036;
+alter table DAI_USER.CAMPAIGN_ITEM disable constraint SYS_C0048037;
+alter table DAI_USER.CAMPAIGN_ITEM disable constraint SYS_C0048282;
+alter table DAI_USER.CAMPAIGN_ITEM_BREAK_POS disable constraint FK_ITEM_BREAK_POS_CAMP_ITEM;
+alter table DAI_USER.CAMPAIGN_ITEM_BREAK_POS disable constraint PK_CAMPAIGN_ITEM_BREAK_POS;
+alter table DAI_USER.CAMPAIGN_ITEM_BREAK_POS disable constraint SYS_C0048204;
+alter table DAI_USER.CAMPAIGN_ITEM_BREAK_POS disable constraint SYS_C0048206;
+alter table DAI_USER.CAMPAIGN_ITEM_BREAK_POS disable constraint SYS_C0048208;
+alter table DAI_USER.CAMPAIGN_ITEM_BREAK_POS disable constraint SYS_C0048328;
+alter table DAI_USER.CAMPAIGN_ITEM_BREAK_POS disable constraint UQ_CAMPAIGN_ITEM_BREAK_POS;
+alter table DAI_USER.CAMPAIGN_ITEM_GOAL disable constraint FK_CAMPAIGN_ITEM_GOAL;
+alter table DAI_USER.CAMPAIGN_ITEM_GOAL disable constraint PK_CAMPAIGN_ITEM_GOAL;
+alter table DAI_USER.CAMPAIGN_ITEM_GOAL disable constraint SYS_C0048286;
+alter table DAI_USER.CAMPAIGN_ITEM_GOAL disable constraint SYS_C0048287;
+alter table DAI_USER.CAMPAIGN_ITEM_GOAL disable constraint SYS_C0048288;
+alter table DAI_USER.CAMPAIGN_ITEM_GOAL_DAILY disable constraint FK_CAMPAIGN_ITEM_GOAL_DAILY;
+alter table DAI_USER.CAMPAIGN_ITEM_GOAL_DAILY disable constraint PK_CAMPAIGN_ITEM_GOAL_DAILY;
+alter table DAI_USER.CAMPAIGN_ITEM_GOAL_DAILY disable constraint SYS_C0048291;
+alter table DAI_USER.CAMPAIGN_ITEM_GOAL_DAILY disable constraint SYS_C0048292;
+alter table DAI_USER.CAMPAIGN_ITEM_GOAL_DAILY disable constraint SYS_C0048293;
+alter table DAI_USER.CAMPAIGN_ITEM_GOAL_DAILY disable constraint SYS_C0048294;
+alter table DAI_USER.CAMPAIGN_ITEM_GOAL_DAILY disable constraint SYS_C0048295;
+alter table DAI_USER.CAMPAIGN_ITEM_MEDIA_ASSET disable constraint FK_CMPGNITMASSET_CAMPAIGNITEM;
+alter table DAI_USER.CAMPAIGN_ITEM_MEDIA_ASSET disable constraint FK_CMPGNITMASSET_MEDIAASSET;
+alter table DAI_USER.CAMPAIGN_ITEM_MEDIA_ASSET disable constraint PK_CAMPAIGN_ITEM_MEDIA_ASSET;
+alter table DAI_USER.CAMPAIGN_ITEM_MEDIA_ASSET disable constraint SYS_C0048236;
+alter table DAI_USER.CAMPAIGN_ITEM_MEDIA_ASSET disable constraint SYS_C0048238;
+alter table DAI_USER.CAMPAIGN_ITEM_MEDIA_ASSET disable constraint SYS_C0048239;
+alter table DAI_USER.CAMPAIGN_ITEM_MEDIA_ASSET disable constraint SYS_C0048240;
+alter table DAI_USER.CAMPAIGN_ITEM_MEDIA_ASSET disable constraint SYS_C0048357;
+alter table DAI_USER.CAMPAIGN_ITEM_METADATA_TARGET disable constraint FK_TARGETELEMENT_MTDATATGT;
+alter table DAI_USER.CAMPAIGN_ITEM_METADATA_TARGET disable constraint FK_TGTELMNT_MTDATATGTELMNT;
+alter table DAI_USER.CAMPAIGN_ITEM_METADATA_TARGET disable constraint PK_CAMPAIGN_ITEM_METADATA_TRGT;
+alter table DAI_USER.CAMPAIGN_ITEM_METADATA_TARGET disable constraint SYS_C0048080;
+alter table DAI_USER.CAMPAIGN_ITEM_METADATA_TARGET disable constraint SYS_C0048082;
+alter table DAI_USER.CAMPAIGN_ITEM_METADATA_TARGET disable constraint SYS_C0048084;
+alter table DAI_USER.CAMPAIGN_ITEM_METADATA_TARGET disable constraint SYS_C0048085;
+alter table DAI_USER.CAMPAIGN_ITEM_METADATA_TARGET disable constraint UQ_TGT_GRP_MTDT_FIELD_OP_CODE;
+alter table DAI_USER.CAMPAIGN_ITEM_METADATA_TGT_GRP disable constraint FK_METADATA_TARGET_CAMP_ITEM;
+alter table DAI_USER.CAMPAIGN_ITEM_METADATA_TGT_GRP disable constraint PK_CAMPAIGN_ITEM_MTDT_TGT_GRP;
+alter table DAI_USER.CAMPAIGN_ITEM_METADATA_TGT_GRP disable constraint SYS_C0048072;
+alter table DAI_USER.CAMPAIGN_ITEM_METADATA_TGT_GRP disable constraint SYS_C0048074;
+alter table DAI_USER.CAMPAIGN_ITEM_NET disable constraint FK_CMPGN_ITM_NET_CAMPAIGNITEM;
+alter table DAI_USER.CAMPAIGN_ITEM_NET disable constraint FK_CMPGN_ITM_NET_NETWORK;
+alter table DAI_USER.CAMPAIGN_ITEM_NET disable constraint PK_CAMPAIGN_ITEM_NET;
+alter table DAI_USER.CAMPAIGN_ITEM_NET disable constraint SYS_C0048165;
+alter table DAI_USER.CAMPAIGN_ITEM_NET disable constraint SYS_C0048166;
+alter table DAI_USER.CAMPAIGN_ITEM_TIME disable constraint FK_ITEM_TIME_CAMPAIGN_ITEM;
+alter table DAI_USER.CAMPAIGN_ITEM_TIME disable constraint PK_CAMPAIGN_ITEM_TIME;
+alter table DAI_USER.CAMPAIGN_ITEM_TIME disable constraint SYS_C0048058;
+alter table DAI_USER.CAMPAIGN_ITEM_TIME disable constraint SYS_C0048060;
+alter table DAI_USER.CAMPAIGN_ITEM_TIME disable constraint SYS_C0048061;
+alter table DAI_USER.CAMPAIGN_ITEM_TIME disable constraint SYS_C0048062;
+alter table DAI_USER.CAMPAIGN_ITEM_TIME disable constraint SYS_C0048063;
+alter table DAI_USER.CAMPAIGN_ITEM_TIME disable constraint SYS_C0048064;
+alter table DAI_USER.CAMPAIGN_ITEM_TIME disable constraint SYS_C0048065;
+alter table DAI_USER.CAMPAIGN_ITEM_TIME disable constraint SYS_C0048066;
+alter table DAI_USER.CAMPAIGN_ITEM_TIME disable constraint SYS_C0048067;
+alter table DAI_USER.CAMPAIGN_ITEM_TIME disable constraint SYS_C0048068;
+alter table DAI_USER.CAMPAIGN_NOTES disable constraint FK_NOTE_CAMPAIGN;
+alter table DAI_USER.CAMPAIGN_NOTES disable constraint PK_CAMPAIGN_NOTES;
+alter table DAI_USER.CAMPAIGN_NOTES disable constraint SYS_C0048276;
+alter table DAI_USER.CAMPAIGN_NOTES disable constraint SYS_C0048277;
+alter table DAI_USER.CAMPAIGN_NOTES disable constraint SYS_C0048278;
+alter table DAI_USER.CANOE_ADS_ENDPOINT disable constraint FK_CANOEADSENDPOINT_OP;
+alter table DAI_USER.CANOE_ADS_ENDPOINT disable constraint PK_CANOE_ADS_ENDPOINT;
+alter table DAI_USER.CANOE_ADS_ENDPOINT disable constraint SYS_C0048309;
+alter table DAI_USER.CANOE_ADS_ENDPOINT disable constraint SYS_C0048310;
+alter table DAI_USER.CANOE_ADS_ENDPOINT disable constraint SYS_C0048311;
+alter table DAI_USER.CANOE_ADS_ENDPOINT disable constraint SYS_C0048312;
+alter table DAI_USER.DATABASECHANGELOG disable constraint PK_DATABASECHANGELOG;
+alter table DAI_USER.DATABASECHANGELOG disable constraint SYS_C0047962;
+alter table DAI_USER.DATABASECHANGELOG disable constraint SYS_C0047963;
+alter table DAI_USER.DATABASECHANGELOG disable constraint SYS_C0047964;
+alter table DAI_USER.DATABASECHANGELOG disable constraint SYS_C0047965;
+alter table DAI_USER.DATABASECHANGELOG disable constraint SYS_C0047966;
+alter table DAI_USER.DATABASECHANGELOG disable constraint SYS_C0047967;
+alter table DAI_USER.DATABASECHANGELOGLOCK disable constraint PK_DATABASECHANGELOGLOCK;
+alter table DAI_USER.DATABASECHANGELOGLOCK disable constraint SYS_C0047959;
+alter table DAI_USER.DATABASECHANGELOGLOCK disable constraint SYS_C0047960;
+alter table DAI_USER.MEDIA_ASSET disable constraint FK_MEDIA_ASSET_PROVIDER;
+alter table DAI_USER.MEDIA_ASSET disable constraint PK_MEDIA_ASSET;
+alter table DAI_USER.MEDIA_ASSET disable constraint SYS_C0048091;
+alter table DAI_USER.MEDIA_ASSET disable constraint SYS_C0048092;
+alter table DAI_USER.MEDIA_ASSET disable constraint SYS_C0048093;
+alter table DAI_USER.MEDIA_ASSET disable constraint SYS_C0048098;
+alter table DAI_USER.MEDIA_ASSET disable constraint SYS_C0048099;
+alter table DAI_USER.MEDIA_ASSET disable constraint SYS_C0048101;
+alter table DAI_USER.MEDIA_ASSET disable constraint UQ_MEDIA_ASSET;
+alter table DAI_USER.METADATA_ENUM_VALUE disable constraint FK_METADATA_VALUE_ELEMENT;
+alter table DAI_USER.METADATA_ENUM_VALUE disable constraint PK_METADATA_ENUM_VALUE;
+alter table DAI_USER.METADATA_ENUM_VALUE disable constraint SYS_C0047979;
+alter table DAI_USER.METADATA_ENUM_VALUE disable constraint SYS_C0047980;
+alter table DAI_USER.METADATA_ENUM_VALUE disable constraint SYS_C0047982;
+alter table DAI_USER.METADATA_ENUM_VALUE disable constraint SYS_C0047983;
+alter table DAI_USER.METADATA_FIELD disable constraint PK_METADATA_FIELD;
+alter table DAI_USER.METADATA_FIELD disable constraint SYS_C0047975;
+alter table DAI_USER.METADATA_FIELD disable constraint SYS_C0047977;
+alter table DAI_USER.METADATA_FIELD disable constraint UQ_METADATA_FIELD;
+alter table DAI_USER.METADATA_FIELD_SPEC disable constraint FK_METADATA_TYPE_ELEMENT;
+alter table DAI_USER.METADATA_FIELD_SPEC disable constraint PK_METADATA_FIELD_SPEC;
+alter table DAI_USER.METADATA_FIELD_SPEC disable constraint SYS_C0048171;
+alter table DAI_USER.METADATA_FIELD_SPEC disable constraint SYS_C0048172;
+alter table DAI_USER.METADATA_FIELD_SPEC disable constraint SYS_C0048173;
+alter table DAI_USER.METADATA_FIELD_SPEC disable constraint SYS_C0048174;
+alter table DAI_USER.METADATA_FIELD_SPEC disable constraint UQ_METADATA_FIELD_SPEC;
+alter table DAI_USER.NETWORK disable constraint FK_NETWORK_PROGRAMMER;
+alter table DAI_USER.NETWORK disable constraint PK_NETWORK;
+alter table DAI_USER.NETWORK disable constraint SYS_C0048120;
+alter table DAI_USER.NETWORK disable constraint SYS_C0048121;
+alter table DAI_USER.NETWORK disable constraint SYS_C0048122;
+alter table DAI_USER.OPERATOR disable constraint PK_OPERATOR;
+alter table DAI_USER.OPERATOR disable constraint SYS_C0047989;
+alter table DAI_USER.OPERATOR disable constraint SYS_C0047990;
+alter table DAI_USER.PRODUCT_CATEGORY disable constraint FK_PRODUCT_CATEGORY_INDUSTRY;
+alter table DAI_USER.PRODUCT_CATEGORY disable constraint FK_PRODUCT_CATEGORY_MAJOR_GRP;
+alter table DAI_USER.PRODUCT_CATEGORY disable constraint FK_PRODUCT_CATEGORY_PARENT;
+alter table DAI_USER.PRODUCT_CATEGORY disable constraint FK_PRODUCT_CATEGORY_SUB_GRP;
+alter table DAI_USER.PRODUCT_CATEGORY disable constraint PK_PRODUCT_CATEGORY;
+alter table DAI_USER.PRODUCT_CATEGORY disable constraint SYS_C0047986;
+alter table DAI_USER.PRODUCT_CATEGORY disable constraint SYS_C0047987;
+alter table DAI_USER.PRODUCT_CATEGORY_EXCLUDED disable constraint FK_CAT_EXCLUDED_OPERATOR;
+alter table DAI_USER.PRODUCT_CATEGORY_EXCLUDED disable constraint FK_CAT_EXCLUDED_PRODUCT_CAT;
+alter table DAI_USER.PRODUCT_CATEGORY_EXCLUDED disable constraint PK_PRODUCT_CATEGORY_EXCLUDED;
+alter table DAI_USER.PRODUCT_CATEGORY_EXCLUDED disable constraint SYS_C0047992;
+alter table DAI_USER.PRODUCT_CATEGORY_EXCLUDED disable constraint SYS_C0047993;
+alter table DAI_USER.PRODUCT_CATEGORY_EXCLUDED disable constraint SYS_C0047994;
+alter table DAI_USER.PROGRAMMER disable constraint PK_PROGRAMMER;
+alter table DAI_USER.PROGRAMMER disable constraint SYS_C0047998;
+alter table DAI_USER.PROGRAMMER disable constraint SYS_C0047999;
+alter table DAI_USER.PROGRAMMER disable constraint SYS_C0048325;
+alter table DAI_USER.PROGRAMMER disable constraint UQ_PROGRAMMER;
+alter table DAI_USER.PROGRAMMER_CIS disable constraint FK_PROGRAMMER_CIS_CIS;
+alter table DAI_USER.PROGRAMMER_CIS disable constraint FK_PROGRAMMER_CIS_PROGRAMMER;
+alter table DAI_USER.PROGRAMMER_CIS disable constraint PK_PROGRAMMER_CIS;
+alter table DAI_USER.PROGRAMMER_CIS disable constraint SYS_C0048373;
+alter table DAI_USER.PROGRAMMER_CIS disable constraint SYS_C0048374;
+alter table DAI_USER.PROGRAMMER_RANKING disable constraint FK_PROGRAMMER_RANKING;
+alter table DAI_USER.PROGRAMMER_RANKING disable constraint PK_PROGRAMMER_RANKING;
+alter table DAI_USER.PROGRAMMER_RANKING disable constraint SYS_C0048177;
+alter table DAI_USER.PROGRAMMER_RANKING disable constraint SYS_C0048178;
+alter table DAI_USER.PROGRAMMER_RANKING disable constraint SYS_C0048179;
+alter table DAI_USER.PROGRAMMER_RANKING disable constraint SYS_C0048180;
+alter table DAI_USER.PROGRAMMER_RANKING disable constraint SYS_C0048181;
+alter table DAI_USER.PROVIDER disable constraint PK_PROVIDER;
+alter table DAI_USER.PROVIDER disable constraint SYS_C0048332;
+alter table DAI_USER.PROVIDER disable constraint SYS_C0048333;
+alter table DAI_USER.REVIEW_CAMPAIGN disable constraint SYS_C0048213;
+alter table DAI_USER.REVIEW_CAMPAIGN disable constraint SYS_C0048214;
+alter table DAI_USER.VOD_ENDPOINT disable constraint FK_VE_DEFAULT_ADSENDPOINT;
+alter table DAI_USER.VOD_ENDPOINT disable constraint FK_VE_DEREG_ADSENDPOINT;
+alter table DAI_USER.VOD_ENDPOINT disable constraint FK_VE_PLACEMENT_ADSENDPOINT;
+alter table DAI_USER.VOD_ENDPOINT disable constraint FK_VE_PSN_ADSENDPOINT;
+alter table DAI_USER.VOD_ENDPOINT disable constraint FK_VE_SCR_ADSENDPOINT;
+alter table DAI_USER.VOD_ENDPOINT disable constraint FK_VE_SSN_ADSENDPOINT;
+alter table DAI_USER.VOD_ENDPOINT disable constraint FK_VOD_ENDPOINT_CIS_ID;
+alter table DAI_USER.VOD_ENDPOINT disable constraint FK_VOD_ENDPOINT_OPERATOR;
+alter table DAI_USER.VOD_ENDPOINT disable constraint FK_VOD_ENDPOINT_PARENT_ADM_ID;
+alter table DAI_USER.VOD_ENDPOINT disable constraint PK_VOD_ENDPOINT;
+alter table DAI_USER.VOD_ENDPOINT disable constraint SYS_C0048255;
+alter table DAI_USER.VOD_ENDPOINT disable constraint SYS_C0048256;
+alter table DAI_USER.VOD_ENDPOINT disable constraint SYS_C0048257;
+alter table DAI_USER.VOD_ENDPOINT disable constraint SYS_C0048259;
+alter table DAI_USER.VOD_ENDPOINT disable constraint SYS_C0048302;
+alter table DAI_USER.VOD_ENDPOINT_REGISTRATION disable constraint FK_ENDPOINTREG_VODENDPOINT;
+alter table DAI_USER.VOD_ENDPOINT_REGISTRATION disable constraint FK_ENDPOINT_REG_PROVIDER;
+alter table DAI_USER.VOD_ENDPOINT_REGISTRATION disable constraint FK_VER_DEFAULT_ADSENDPOINT;
+alter table DAI_USER.VOD_ENDPOINT_REGISTRATION disable constraint FK_VER_DEREG_ADSENDPOINT;
+alter table DAI_USER.VOD_ENDPOINT_REGISTRATION disable constraint FK_VER_PLACEMENT_ADSENDPOINT;
+alter table DAI_USER.VOD_ENDPOINT_REGISTRATION disable constraint FK_VER_PSN_ADSENDPOINT;
+alter table DAI_USER.VOD_ENDPOINT_REGISTRATION disable constraint FK_VER_SCR_ADSENDPOINT;
+alter table DAI_USER.VOD_ENDPOINT_REGISTRATION disable constraint FK_VER_SSN_ADSENDPOINT;
+alter table DAI_USER.VOD_ENDPOINT_REGISTRATION disable constraint PK_VOD_ENDPOINT_REGISTRATION;
+alter table DAI_USER.VOD_ENDPOINT_REGISTRATION disable constraint SYS_C0048319;
+alter table DAI_USER.VOD_ENDPOINT_REGISTRATION disable constraint SYS_C0048320;
+alter table DAI_USER.VOD_ENDPOINT_REGISTRATION disable constraint SYS_C0048342;
+alter table DAI_USER.VOD_ENDPOINT_REGISTRATION disable constraint SYS_C0048344;
+alter table DAI_USER.VOD_ENDPOINT_REGISTRATION disable constraint SYS_C0048355;
+alter table DAI_USER.VOD_ENDPOINT_REG_CHECK disable constraint FK_RC_DEFAULT_ADSENDPOINT;
+alter table DAI_USER.VOD_ENDPOINT_REG_CHECK disable constraint FK_RC_DEREG_ADSENDPOINT;
+alter table DAI_USER.VOD_ENDPOINT_REG_CHECK disable constraint FK_RC_PLACEMENT_ADSENDPOINT;
+alter table DAI_USER.VOD_ENDPOINT_REG_CHECK disable constraint FK_RC_PSN_ADSENDPOINT;
+alter table DAI_USER.VOD_ENDPOINT_REG_CHECK disable constraint FK_RC_SCR_ADSENDPOINT;
+alter table DAI_USER.VOD_ENDPOINT_REG_CHECK disable constraint FK_RC_SSN_ADSENDPOINT;
+alter table DAI_USER.VOD_ENDPOINT_REG_CHECK disable constraint FK_REGCHECK_VODENDPOINT;
+alter table DAI_USER.VOD_ENDPOINT_REG_CHECK disable constraint PK_VOD_ENDPOINT_REG_CHECK;
+alter table DAI_USER.VOD_ENDPOINT_REG_CHECK disable constraint SYS_C0048315;
+alter table DAI_USER.VOD_ENDPOINT_REG_CHECK disable constraint SYS_C0048316;
+alter table DAI_USER.VOD_ENDPOINT_REG_CHECK disable constraint SYS_C0048330;
+alter table DAI_USER.VOD_ENDPOINT_REG_CHECK disable constraint SYS_C0048363;
+alter table DAI_USER.VOD_ENDPOINT_STATUS disable constraint ASSET_VOD_ENDPOINT_STATUS_FK;
+alter table DAI_USER.VOD_ENDPOINT_STATUS disable constraint PK_VOD_ENDPOINT_STATUS;
+alter table DAI_USER.VOD_ENDPOINT_STATUS disable constraint SYS_C0048262;
+alter table DAI_USER.VOD_ENDPOINT_STATUS disable constraint SYS_C0048263;
+alter table DAI_USER.VOD_ENDPOINT_STATUS disable constraint SYS_C0048264;
+alter table DAI_USER.VOD_ENDPOINT_STATUS disable constraint SYS_C0048265;
+alter table DAI_USER.VOD_ENDPOINT_STATUS disable constraint UQ_VOD_ENDPOINT_STATUS;
+alter table DAI_USER.VOD_ENDPOINT_STATUS disable constraint VOD_ENDPOINT_STATUS_FK;
+
+
+
+
+
+
+
+select distinct owner
+from all_objects
+
+
+
+select 
+ OWNER, OBJECT_TYPE, OBJECT_NAME, CREATED, timestamp, STATUS
+from ALL_OBJECTS
+where owner like 'DAI%'
+  and object_type = 'TABLE'
+order by 1, 3
+
+
+
+
+
+

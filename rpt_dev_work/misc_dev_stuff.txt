@@ -1,0 +1,181 @@
+PDI Java Script:
+
+var logText = previous_result.getLogText();
+parent_job.setVariable("LOG_TEXT", logText);
+true;
+
+
+${DATA_DIR}\scte_XMLs
+
+
+
+${file_processing}
+
+
+
+/PlacementRequests/adm:PlacementRequest/adm:SystemContext/adm:ServiceGroup
+/PLACEMENTREQUEST/SYSTEMCONTEXT/SERVICEGROUP
+
+
+C:\Users\benaycrigg\workspaces\dai_etl\test\data\scte_XMLs\jma_sample_psn.xml
+C:\Users\benaycrigg\workspaces\dai_etl\test\data\scte_XMLs\placement-requests.g.2012-04-27.xml
+
+
+
+
+
+
+
+
+
+
+set serveroutput ON
+declare  v_stmt varchar2(300);
+
+begin
+DBMS_OUTPUT.enable(1000000);
+v_stmt := 'truncate table ';
+
+for T in (select TABLE_NAME
+          from user_tables
+          where table_name like 'SCTE%TMP')
+ LOOP
+  DBMS_OUTPUT.PUT_LINE(V_STMT||' '||T.TABLE_NAME);
+  execute immediate (V_STMT||t.table_name);
+ end loop;
+end;
+---=====================================================================
+---=====================================================================
+truncate table SCTE_REQUEST
+truncate table SCTE_RESPONSE
+truncate table SCTE_RESPONSE_PLACEMENT
+
+
+select * from SCTE_REQUEST
+select * from SCTE_REQUEST_OPPORTUNITY
+
+select CREATED_BY, CREATED_DT, LAST_ETL_PROC_NAME, LAST_ETL_DT, ADM_DATA
+from SCTE_REQUEST
+
+
+select COUNT(*) from SCTE_RESP_TMP   ---> 25
+select COUNT(*) from SCTE_RESPONSE   ---> 25
+select COUNT(*) from SCTE_RESP_PLCMT_TMP
+select count(*) from SCTE_RESPONSE_PLACEMENT   ---> 23
+
+
+select TABLE_NAME
+from USER_TABLES
+where TABLE_NAME like 'SCTE%'
+  and table_name not like '%TMP'
+
+
+select TABLE_NAME, COLUMN_NAME
+from USER_TAB_COLS where COLUMN_NAME like '%ERVI%'
+order by 2 
+ 
+ 
+ 
+ 
+ select * from dai_ods.DAI_MEDIA_ASSET
+
+
+I need BOTH PROVIDER_ID and ASSET_IDSTRING? to return MEDIA_ASSET.ID
+
+
+select ADM_DATA, ADM_DATA_VOD_ENDPT_ID
+from dai_ods.SCTE_REQUEST
+
+
+select table_name
+from DBA_TABLES
+where owner = 'DAI_ODS'
+order by 1
+
+
+
+select provider_id, asset_idstring
+from dai_ods.DAI_MEDIA_ASSET
+
+
+select
+ srp.tracking_provider_id, srp.tracking_asset_id,
+ ma.provider_id, ma.asset_idstring, ma.id
+from dai_ods.SCTE_RESPONSE_PLACEMENT srp, dai_ods.DAI_MEDIA_ASSET ma
+where ma.provider_id    = srp.tracking_provider_id
+  and ma.asset_idstring = srp.tracking_asset_id
+
+
+
+
+select
+   srp.session_id,
+   op.company_name OPERATOR,
+   substr(srp.tracking_id,1,instr(srp.tracking_id,'-',1)-1) CAMPAIGN_ID,
+   substr(srp.tracking_id,  instr(srp.tracking_id,'-', 1)+1,instr(srp.tracking_id,'-',2)-1) CAMPAIGN_ITEM_ID,
+   req.adm_data,  ma.id as media_asset_id,
+   to_date(substr(req.CLIENT_DT_STRING,1,13),'YYYY-MM-DD"T"HH24') TXN_DATE_HOUR,
+   count(srp.placement_id) num_insertions
+from dai_ods.SCTE_RESPONSE_PLACEMENT srp, dai_ods.SCTE_RESPONSE res, dai_ods.SCTE_RQST_TMP req,
+     dai_ods.DAI_OPERATOR op, dai_ods.DAI_VOD_ENDPOINT endpt, dai_ods.DAI_MEDIA_ASSET ma
+where srp.response_message_id = res.message_id
+  and RES.REQUEST_MESSAGE_ID  = REQ.MESSAGE_ID
+  and op.id                   = endpt.operator_id
+  and endpt.id                = req.identity_vod_endpt_id
+  and ma.provider_id          = srp.tracking_provider_id
+  and ma.asset_idstring       = srp.tracking_asset_id
+group by   
+   srp.session_id,
+   op.company_name,
+   substr(srp.tracking_id,1,instr(srp.tracking_id,'-',1)-1),
+   substr(srp.tracking_id,  instr(srp.tracking_id,'-', 1)+1,instr(srp.tracking_id,'-',2)-1),
+   req.adm_data,  ma.id,
+   to_date(substr(req.CLIENT_DT_STRING,1,13),'YYYY-MM-DD"T"HH24')
+order by 1, 2   
+
+
+
+select
+   srp.session_id,
+   substr(srp.tracking_id,1,instr(srp.tracking_id,'-',1)-1) CAMPAIGN_ID,
+   substr(srp.tracking_id,  instr(srp.tracking_id,'-', 1)+1,instr(srp.tracking_id,'-',2)-1) CAMPAIGN_ITEM_ID,
+   req.adm_data,  ma.id as media_asset_id,
+   to_date(substr(req.CLIENT_DT_STRING,1,13),'YYYY-MM-DD"T"HH24') TXN_DATE_HOUR,
+   count(srp.placement_id) num_insertions
+from dai_ods.SCTE_RESPONSE_PLACEMENT srp, dai_ods.SCTE_RESPONSE res, dai_ods.SCTE_REQUEST req,
+     dai_ods.DAI_MEDIA_ASSET ma
+where srp.response_message_id = res.message_id
+  and RES.REQUEST_MESSAGE_ID  = REQ.MESSAGE_ID
+  and ma.provider_id          = srp.tracking_provider_id
+  and ma.asset_idstring       = srp.tracking_asset_id
+group by   
+   srp.session_id,
+   substr(srp.tracking_id,1,instr(srp.tracking_id,'-',1)-1),
+   substr(srp.tracking_id,  instr(srp.tracking_id,'-', 1)+1,instr(srp.tracking_id,'-',2)-1),
+   req.adm_data,  ma.id,
+   to_date(substr(req.CLIENT_DT_STRING,1,13),'YYYY-MM-DD"T"HH24')
+order by 1, 2   
+
+
+select count(*) from dai_ods.SCTE_RESPONSE_PLACEMENT
+select count(*) from dai_ods.SCTE_RESPONSE
+select count(*) from dai_ods.SCTE_REQUEST
+
+
+
+select count(*) from dai_ods.SCTE_RESPONSE
+where request_message_id in (select message_id from dai_ods.SCTE_REQUEST)
+-----> zero!
+
+
+
+
+
+==============:)
+Can anyone either direct me to some references or clarify / explain the PDI file-system repository?  I understand that it sort of "localizes" environment variable I have in my kettle.properties file.  I am a little confused when I select File/Open.  In my case I have two directories, kjb and ktr containing the relevant Jobs and Transforms.  But within the "root" Repository directory itself I also see Jobs and Transforms, duplicating what is in my sub-directories.  What is this "outer" list of files?  Do I need to do something to "commit" these files?  They are not visible when browsing the file system itself, just when using Spoon.  I am running CE 4.2.1 on Win7.
+
+Thank you!
+
+
+
+

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="CIPService"
+    targetNamespace="urn:cablelabs:safi:xsd:cip:3.0" 
+    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:cip="urn:cablelabs:safi:xsd:cip:3.0"
+    xmlns:tns="urn:cablelabs:safi:xsd:cip:3.0"
+    xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
+    xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+    xmlns:wsp="http://www.w3.org/ns/ws-policy">
+
+    <xs:annotation>
+        <xs:documentation>
+            <b>Copyright (C) 2008-2012, Cable Television Laboratories, Inc.</b>
+            <b>SaFI Campaign Information Package Interface WSDL, Release Version 3.0.0</b>
+            <b>This WSDL is a normative component of CableLabs® Subscription and Fulfillment Interfaces,
+	       Campaign Information Package Specification, OC-SP-SaFI-CIPv3.0-xxxxxx</b>
+        </xs:documentation>
+    </xs:annotation>
+
+    <wsp:Policy wsu:Id="addressing-policy" wsdl:required="true">
+        <wsam:Addressing>
+            <wsp:Policy>
+                <wsam:AnonymousResponse/>
+                <wsam:MessageId/>
+            </wsp:Policy>
+        </wsam:Addressing>
+    </wsp:Policy>
+
+    <wsdl:types>
+        <wsdl:documentation>This import provides access to the complete CIP data and messaging
+            model</wsdl:documentation>
+        <xs:schema>
+            <xs:import namespace="urn:cablelabs:safi:xsd:cip:3.0"
+                schemaLocation="OC-SaFI-CIP-3.0.0.xsd"/>
+        </xs:schema>
+    </wsdl:types>
+
+    <wsdl:message name="msgFeedbackNotice">
+        <wsdl:documentation/>
+        <wsdl:part name="FeedbackNotice" element="cip:FeedbackNotice"/>
+    </wsdl:message>        
+    
+    
+    <wsdl:message name="msgFeedbackResponse">
+        <wsdl:documentation/>
+        <wsdl:part name="FeedbackResponse" element="cip:FeedbackResponse"/>
+    </wsdl:message>        
+    
+    <wsdl:message name="msgSetRegistrationRequest">
+        <wsdl:documentation/>
+        <wsdl:part name="SetRegistrationRequest" element="cip:SetRegistrationRequest"/>
+    </wsdl:message>        
+    
+    <wsdl:message name="msgSetRegistrationResponse">
+        <wsdl:documentation/>
+        <wsdl:part name="SetRegistrationResponse" element="cip:SetRegistrationResponse"/>
+    </wsdl:message>
+    
+    <wsdl:message name="msgGetRegistrationRequest">
+        <wsdl:documentation/>
+        <wsdl:part name="GetRegistrationRequest" element="cip:GetRegistrationRequest"/>
+    </wsdl:message>        
+    
+    <wsdl:message name="msgGetRegistrationResponse">
+        <wsdl:documentation/>
+        <wsdl:part name="GetRegistrationResponse" element="cip:GetRegistrationResponse"/>
+    </wsdl:message>
+    
+    <wsdl:message name="msgReadRequest">
+        <wsdl:documentation/>
+        <wsdl:part name="ReadRequest" element="cip:ReadRequest"/>
+    </wsdl:message>
+    
+    <wsdl:message name="msgReadResponse">
+        <wsdl:documentation/>
+        <wsdl:part name="ReadResponse" element="cip:ReadResponse"/>
+    </wsdl:message>
+    
+    <wsdl:message name="msgUpdateNotice">
+        <wsdl:documentation/>
+        <wsdl:part name="UpdateNotice" element="cip:UpdateNotice"/>
+    </wsdl:message>
+    <wsdl:message name="msgUpdateResponse">
+        <wsdl:documentation/>
+        <wsdl:part name="UpdateResponse" element="cip:UpdateResponse"/>
+    </wsdl:message>
+    
+    <wsdl:message name="msgInvalidRequest">
+        <wsdl:documentation/>
+        <wsdl:part name="InvalidRequest" element="cip:InvalidRequest"/>
+    </wsdl:message>
+
+    <wsdl:portType name="ptFeedback">
+        <wsdl:operation name="opFeedback">
+            <wsdl:input message="tns:msgFeedbackNotice"
+                wsaw:Action="http://www.cablelabs.com/namespaces/safi/wsdl/cip/opFeedback/msgFeedbackNotice"/>
+            <wsdl:output message="tns:msgFeedbackResponse"
+                wsaw:Action="http://www.cablelabs.com/namespaces/safi/wsdl/cip/opFeedback/msgFeedbackResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+ 
+    <wsdl:portType name="ptSetRegistration">
+        <wsdl:operation name="opSetRegistration">
+            <wsdl:input message="tns:msgSetRegistrationRequest"
+	     wsaw:Action="http://www.cablelabs.com/namespaces/safi/wsdl/cip/opSetRegistration/msgSetRegistrationRequest"/>
+                        <wsdl:output message="tns:msgSetRegistrationResponse"
+	     wsaw:Action="http://www.cablelabs.com/namespaces/safi/wsdl/cip/opSetRegistration/msgSetRegistrationResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    
+    <wsdl:portType name="ptGetRegistration">
+        <wsdl:operation name="opGetRegistration">
+            <wsdl:input message="tns:msgGetRegistrationRequest"
+	     wsaw:Action="http://www.cablelabs.com/namespaces/safi/wsdl/cip/opGetRegistration/msgGetRegistrationRequest"/>
+            <wsdl:output message="tns:msgGetRegistrationResponse"
+             wsaw:Action="http://www.cablelabs.com/namespaces/safi/wsdl/cip/opGetRegistration/msgGetRegistrationResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    
+    <wsdl:portType name="ptReadRequest">
+        <wsdl:operation name="opReadRequest">
+            <wsdl:input message="tns:msgReadRequest"
+             wsaw:Action="http://www.cablelabs.com/namespaces/safi/wsdl/cip/opReadRequest/msgReadRequest"/>
+            <wsdl:output message="tns:msgReadResponse"
+	     wsaw:Action="http://www.cablelabs.com/namespaces/safi/wsdl/cip/opReadRequest/msgReadResponse"/>
+            <wsdl:fault name="fault1" message="tns:msgInvalidRequest"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    
+    <wsdl:portType name="ptUpdateNotice">
+        <wsdl:operation name="opUpdateNotice">
+            <wsdl:input message="tns:msgUpdateNotice"
+	     wsaw:Action="http://www.cablelabs.com/namespaces/safi/wsdl/cip/opUpdateNotice/msgUpdateNotice"/>
+            <wsdl:output message="tns:msgUpdateResponse"
+	     wsaw:Action="http://www.cablelabs.com/namespaces/safi/wsdl/cip/opUpdateNotice/msgUpdateResponse"/>
+        </wsdl:operation> 
+    </wsdl:portType>
+    
+    <wsdl:binding name="bdCIP-FEEDBACK-SOAP12HTTP" type="tns:ptFeedback">
+        <wsp:PolicyReference URI="#addressing-policy"/>
+        <wsoap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="opFeedback">
+            <wsoap12:operation
+                soapAction="http://www.cablelabs.com/namespaces/safi/wsdl/cip/opFeedback/msgFeedbackNotice"
+            soapActionRequired="true" wsdl:required="true"/>
+            <wsdl:input>
+                <wsoap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsoap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    
+    <wsdl:binding name="bdCIP-SETREG-SOAP12HTTP" type="tns:ptSetRegistration">
+        <wsp:PolicyReference URI="#addressing-policy"/>
+         <wsoap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="opSetRegistration">
+            <wsoap12:operation
+                soapAction="http://www.cablelabs.com/namespaces/safi/wsdl/cip/opSetRegistration/msgSetRegistrationRequest"
+                soapActionRequired="true" wsdl:required="true"/>
+            <wsdl:input>
+                <wsoap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsoap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    
+    <wsdl:binding name="bdCIP-GETREG-SOAP12HTTP" type="tns:ptGetRegistration">
+        <wsp:PolicyReference URI="#addressing-policy"/>
+        <wsoap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="opGetRegistration">
+            <wsoap12:operation
+                soapAction="http://www.cablelabs.com/namespaces/safi/wsdl/cip/opSetRegistration/msgGetRegistrationRequest"
+                soapActionRequired="true" wsdl:required="true"/>
+            <wsdl:input>
+                <wsoap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsoap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    
+    <wsdl:binding name="bdCIP-READ-SOAP12HTTP" type="tns:ptReadRequest">
+        <wsp:PolicyReference URI="#addressing-policy"/>
+         <wsoap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="opReadRequest">
+            <wsoap12:operation
+                soapAction="http://www.cablelabs.com/namespaces/safi/wsdl/cip/opReadRequest/msgReadRequest"
+                soapActionRequired="true" wsdl:required="true"/>
+            <wsdl:input>
+                <wsoap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsoap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault1">
+                <wsoap12:fault name="fault1" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    
+    <wsdl:binding name="bdCIP-UPDATE-SOAP12HTTP" type="tns:ptUpdateNotice">
+        <wsp:PolicyReference URI="#addressing-policy"/>
+        <wsoap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="opUpdateNotice">
+            <wsoap12:operation
+                soapAction="http://www.cablelabs.com/namespaces/safi/wsdl/cip/opUpdateNotice/msgUpdateNotice"
+                soapActionRequired="true" wsdl:required="true"/>
+            <wsdl:input>
+                <wsoap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsoap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    
+    <wsdl:service name="svCIPClientService">
+        <wsdl:port name="update-soap12-http" binding="tns:bdCIP-UPDATE-SOAP12HTTP">
+            <wsoap12:address
+                location="http://localhost:8080/cipsub/update"/>
+            <wsam:EndpointReference>
+                <wsam:Address>http://localhost:8080/cipsub/update</wsam:Address>
+            </wsam:EndpointReference>
+        </wsdl:port>
+    </wsdl:service>
+    
+    <wsdl:service name="svCIPService">
+        <wsdl:port name="setreg-soap12-http" binding="tns:bdCIP-SETREG-SOAP12HTTP">
+            <wsoap12:address
+                location="http://localhost:8080/cippub/setreg"/>
+            <wsam:EndpointReference>
+                <wsam:Address>http://localhost:8080/cippub/setreg</wsam:Address>
+            </wsam:EndpointReference>
+        </wsdl:port>
+        <wsdl:port name="getreg-soap12-http" binding="tns:bdCIP-GETREG-SOAP12HTTP">
+            <wsoap12:address
+                location="http://localhost:8080/cippub/getreg"/>
+            <wsam:EndpointReference>
+                <wsam:Address>http://localhost:8080/cippub/getreg</wsam:Address>
+            </wsam:EndpointReference>
+        </wsdl:port>
+        <wsdl:port name="read-soap12-http" binding="tns:bdCIP-READ-SOAP12HTTP">
+            <wsoap12:address
+                location="http://localhost:8080/cippub/read"/>
+            <wsam:EndpointReference>
+                <wsam:Address>http://localhost:8080/cippub/read</wsam:Address>
+            </wsam:EndpointReference>
+        </wsdl:port>
+        <wsdl:port name="feedback-soap12-http" binding="tns:bdCIP-FEEDBACK-SOAP12HTTP">
+            <wsoap12:address
+                location="http://localhost:8080/cippub/feedback"/>
+            <wsam:EndpointReference>
+                <wsam:Address>http://localhost:8080/cippub/feedback</wsam:Address>
+            </wsam:EndpointReference>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

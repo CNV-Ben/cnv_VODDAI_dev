@@ -1,0 +1,61 @@
+/*
+    http://forums.pentaho.com/showthread.php?88120-Get-SQL-Warnings&highlight=primary+key+violation
+    http://forums.pentaho.com/showthread.php?87739-Catching-Error-messages-and-warnings
+*/
+select * from user_constraints
+select * from user_cons_columns
+
+select
+ table_name, constraint_type, constraint_name, search_condition, status
+from user_constraints
+where table_name like 'SCTE%' 
+
+
+select table_name, column_name, position, constraint_name
+from user_cons_columns
+where table_name like 'SCTE%' 
+
+select
+ c1.table_name, c2.column_name, c2.position POSN, c2.constraint_name, 
+ c1.constraint_type CONS_TYPO, c1.search_condition, c1.status
+from USER_CONSTRAINTS c1, USER_CONS_COLUMNS c2
+where c1.constraint_name = c2.constraint_name
+  and c1.table_name = c2.table_name
+--  and c1.table_name like 'SCTE%'
+--  and c1.table_name in ('SCTE_REQUEST','SCTE_RQST_TMP')
+--  and c1.table_name in ('SCTE_REQUEST')
+  and c1.table_name in ('SCTE_REQUEST_OPPORTUNITY')
+order by c2.column_name, c1.table_name, c2.constraint_name 
+
+
+
+---======================================================================
+truncate table SCTE_RQST_TMP
+truncate table SCTE_RQST_OPPTY_TMP
+
+select count(message_id) cnt_mssgs, count(unique(message_id)) unq_mssgs
+from SCTE_REQUEST    ---> 46
+
+select count(message_id) cnt_mssgs, count(unique(message_id)) unq_mssgs
+from SCTE_RQST_TMP
+
+
+
+select
+ count(request_message_id||opportunity_id) cnt_mssgs,
+ count(unique(request_message_id||opportunity_id)) unq_mssgs
+from SCTE_REQUEST_OPPORTUNITY    ---> 5
+
+select
+ count(request_message_id||opportunity_id) cnt_mssgs,
+ count(unique(request_message_id||opportunity_id)) unq_mssgs
+from SCTE_RQST_OPPTY_TMP
+
+
+
+
+
+
+
+
+

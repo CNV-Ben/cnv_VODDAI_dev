@@ -1,0 +1,1817 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cip="urn:cablelabs:safi:xsd:cip:3.0" 
+    xmlns:common="urn:cablelabs:safi:xsd:com:3.0" targetNamespace="urn:cablelabs:safi:xsd:cip:3.0"
+    elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+
+		<xs:documentation>
+			<p>
+				<b>Copyright (c)2008-2012, Cable Television Laboratories, Inc.</b>
+				<b>XML Schema, Release Version 3.0.0</b>
+				<b>SaFI Campaign Information Package Interface.</b>
+				<b>This schema is a normative component of CableLabs® Subscription and Fulfillment
+					Interfaces, Campaign Information Package Specification,
+					OC-SP-SaFI-CIPv3.0-xxxxxx</b>
+			</p>
+		</xs:documentation>
+	</xs:annotation>
+	<xs:import namespace="urn:cablelabs:safi:xsd:com:3.0" schemaLocation="OC-SaFI-COM-3.0.0.xsd"/>
+	<xs:element name="CampInfoPkg">
+		<xs:annotation>
+			<xs:documentation>
+				<p>The Campaign Info Package is the root element of all new or updated campaign
+					descriptions. It contains the following data units:</p>
+				<ul>
+					<li>Exactly one Version element, which is a schema version-control element</li>
+					<li>At least one MsoOrder element</li>
+					<li>Zero or more Ext elements, which are optional extension elements</li>
+				</ul>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Version" type="common:VersionType"/>
+				<xs:element name="MsoOrder" type="cip:MsoOrderType" maxOccurs="unbounded"/>
+				<xs:element name="Ext" type="common:ExtType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- Message elements -->
+	<xs:element name="FeedbackNotice">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>
+					<p>Posts a CIP document containing CIP state feedback elements from the CIP
+						subscriber to the CIP publisher. FeedbackNotice contains zero or more
+						CampInfoPkg elements, and zero or more Ext extension elements. The isRetry
+						attribute signals that an exact duplicate of a prior message is being
+						posted.</p>
+				</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="cip:CampInfoPkg" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="Ext" type="common:ExtType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="isRetry" type="xs:boolean" default="false"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FeedbackResponse">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>
+					<p>FeedbackResponse is a reply to a FeedbackNotice message. FeedbackResponse
+						elements include a MsgResultAttributeGroup attribute group.</p>
+					<p>The optional Notes element can provide supplemental detail.</p>
+				</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="Notes" type="xs:string" minOccurs="0"/>
+				<xs:element name="Ext" type="common:ExtType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="cip:MsgResultAttributeGroup"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="InvalidRequest">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>
+					<p>An InvaldRequest is sent in response to an errored Read Request.</p>
+					<p>An InvalidRequest element MUST contain a Reason element, containing one of the
+						following fault indicators:</p>
+					<ul>
+						<li>
+							<tt>From-ToNotPaired</tt> indicates that the sender and recipient are
+							not paired.</li>
+						<li>
+							<tt>IdOwnerNotPaired</tt> indicates that the ID and owner are not
+							paired.</li>
+						<li>
+							<tt>NoSelection</tt> indicates that a selection is required.</li>
+						<li>
+							<tt>NoneFound</tt> indicates that no search results were returned.</li>
+						<li>
+							<tt>private:.+</tt> contains a private fault code, behavior
+							undefined.</li>
+					</ul>
+					<p>The Values (of type BundleSelectorGroup) attribute group repeats the received
+						request.</p>
+					<p>The optional Notes element can provide supplemental detail.</p>
+					<p>contextId is an optional value that MUST be present <em>if and only if</em>
+						it was supplied in the readRequest message to which this InvalidRequest
+						message is the response.</p>
+				</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="Reason">
+					<xs:simpleType>
+						<xs:restriction base="xs:NMTOKEN">
+							<xs:pattern value="From-ToNotPaired|IdOwnerNotPaired|NoSelection|NoneFound|private:.+"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="Values">
+					<xs:complexType>
+						<xs:sequence/>
+						<xs:attributeGroup ref="cip:BundleSelectorGroup"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Notes" type="xs:string" minOccurs="0"/>
+				<xs:element name="Ext" type="common:ExtType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="contextId" type="cip:ContextIdType" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ReadRequest">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>
+					<p>A ReadRequest message provides a client the ability to request CIP data. The
+						BundleSelectorGroup identifies the top-level bundles to be returned.</p>
+					<p>The contextId attribute is optional, but if it is present, it MUST be
+						returned in the ReadResponse that satisifes this readRequest.</p>
+				</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="Ext" type="common:ExtType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="contextId" type="cip:ContextIdType" use="optional"/>
+			<xs:attributeGroup ref="cip:BundleSelectorGroup"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ReadResponse">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>
+					<p>A ReadResponse message is sent in reponse to a successful ReadRequest. ReadResponse will
+						contain a CampInfoPkg with zero or more Bundle elements that satisfy the
+						criteria identified by a ReadRequest.</p>
+					<p>The optional Notes element can provide supplemental detail.</p>
+					<p>contextId is an optional value that MUST be present <em>if and only if</em>
+						it was supplied in the readRequest message to which this ReadResponse
+						message is the response.</p>
+				</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="cip:CampInfoPkg"/>
+				<!-- was 0 – unbounded, now required once -->
+				<xs:element name="Notes" type="xs:string" minOccurs="0"/>
+				<xs:element name="Ext" type="common:ExtType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="contextId" type="cip:ContextIdType" use="optional"/>
+			<xs:attributeGroup ref="cip:MsgResultAttributeGroup"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetRegistrationRequest">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>
+					<p>A GetRegistration message enables the consumer site identified by the
+						Subscriber URI to issue this message to a publisher site to query the
+						current list of active syscodes for the given consumer site.</p>
+				</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="Subscriber" type="xs:anyURI"/>
+				<xs:element name="Ext" type="common:ExtType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetRegistrationResponse">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>
+					<p>Response for GetRegistration message. Identifies the target URI and a list of
+						currently-enabled syscodes for that URI.</p>
+					<p>The optional Notes element can provide supplemental detail.</p>
+				</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="Subscriber" type="xs:anyURI"/>
+				<xs:element name="Syscodes" type="common:SyscodeType" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="Notes" type="xs:string" minOccurs="0"/>
+				<xs:element name="Ext" type="common:ExtType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="cip:MsgResultAttributeGroup"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SetRegistrationRequest">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>
+					<p>The SetRegistrationRequest message MUST be issued by a CIP consumer site to a
+						CIP publication site to add or remove the consumer site from the publication
+						site’s subscription list, or to maintain the set of syscodes which the
+						consumer site presents.</p>
+					<p>The Subscriber value defines both the identity and web service URL of the
+						consumer site. The rest of the message conditions the information expected
+						at that site.</p>
+					<p>Boolean Active applies to the syscode set of the message, and sets those
+						syscodes as enabled or disabled (by Active value) for distributions. For
+						both operations, an empty syscode set implies the entire set of syscodes
+						predefined for the subscriber (via an unspecified mechanism). Any site with
+						no active syscodes is not an active site; any site with one or more active
+						syscodes is an active site.</p>
+					<p>The Syscodes set controls the scope of the operation. If a set of syscodes is
+						supplied, the operation applies only to those syscodes. However, if the set
+						is empty, the operation applies to all of the syscodes predefined (via an
+						unspecified out-of-band mechanism) for the subscriber. Syscodes active for
+						the site but not included in the syscode set are unaffected by the
+						message.</p>
+				</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="Subscriber" type="xs:anyURI"/>
+				<xs:element name="Active" type="xs:boolean"/>
+				<xs:element name="Syscodes" type="common:SyscodeType" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="Ext" type="common:ExtType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SetRegistrationResponse">
+		<xs:complexType mixed="true">
+			<xs:annotation>
+				<xs:documentation>
+					<p>Defines the response to a SetRegistrationRequest message.</p>
+					<p>The optional Notes element can provide supplemental detail.</p>
+				</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="Notes" type="xs:string" minOccurs="0"/>
+				<xs:element name="Ext" type="common:ExtType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="cip:MsgResultAttributeGroup"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UpdateNotice">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>
+					<p>Distributes (pushes) one or more unsolicited updates to campaign data from a
+						CIP publisher to a CIP subscriber. The UpdateNotice
+						message MUST be issued by a publication site to deliver to subscribers one
+						or more revised top-level Bundles, contained in the CampInfoPkg. The isRetry attribute
+						signals that an exact duplicate of a prior message is being distributed.</p>
+				</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element ref="cip:CampInfoPkg"/>
+				<!-- was 0 – unbounded, now required once -->
+				<xs:element name="Ext" type="common:ExtType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="isRetry" type="xs:boolean" default="false"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UpdateResponse">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>
+					<p>UpdateResponse is a reply to an UpdateNotice message. UpdateResponse elements
+						require a MsgResultAttributeGroup attribute group.</p>
+					<p>The optional Notes element can provide supplemental detail.</p>
+				</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="Notes" type="xs:string" minOccurs="0"/>
+				<xs:element name="Ext" type="common:ExtType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="cip:MsgResultAttributeGroup"/>
+		</xs:complexType>
+	</xs:element>
+	<!-- Complex Types -->
+	<xs:complexType name="AppReferenceType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Defines one application that may be associated with this placement.</p>
+				<p>Each AppMetadata element in the list is a container for one key/value pair,
+					where: <ul>
+						<li>the key consists of the namespace and XPath attributes, which identify
+						   to an attribute or element in a defined namespace that
+						   applies to the application. (E.g., CODF metadata).</li>
+						<li>the value appearing in the element body is the corresponding value in the
+						identifed metadata document.</li>
+					</ul>
+					These pairs can either define missing metadata values or override existing metadata
+					values, as the are referenced during the placement containing this reference.
+				</p>				
+				<p>The ContentMgmt element allows for content readiness checking, based on a
+					delivery window and domain.</p>
+				<p>The StateFeedback element provides current statistics with respect to the
+					execution of this application. This is a primary feedback element.</p>
+				<p>The optional Phase element provides application-level phase rules.  These MUST be
+					invoked only for phase events 'lost' and 'found', refering to the complete set of
+					application components.</p>
+				<p>RecordIdAttributeGroupOpt carries the unique identity of a phase in
+				PEID/Epsid.</p>
+				<p>AppType identifies the form of the application content</p>
+				<p>ApplicationDefinitionAttributeGroup characterizes the application, either with an
+					AppId/orgId/appVer set or with an appDataReference.</p>
+				<p>The apply attribute indicates the form in which this asset applies to its parent
+					placement.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="AppMetadata" type="cip:MetadataRefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ContentMgmt" type="cip:ContentMgmtType" minOccurs="0"/>
+			<xs:element name="StateFeedback" type="cip:StateFeedbackType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Phase" type="cip:PhaseType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Ext" type="common:ExtType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="appType" type="cip:AppTypeType" use="required"/>
+		<xs:attributeGroup ref="cip:RecordIdAttributeGroupOpt"/>
+		<xs:attributeGroup ref="cip:ApplicationDefinitionAttributeGroup"/>
+		<xs:attribute name="apply" type="cip:AssetApplicationType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="ArgRefType" mixed="true">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Container for rule argument variable/value pair, with the variable name in the
+					attribute and the value in the element body.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent mixed="true">
+			<xs:restriction base="xs:anyType">
+				<xs:attribute name="variable" type="cip:VariableNameType" use="required"/>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AssetReferenceType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Supplies the detail of one (typically, but possibly more than one) asset that is
+					part of the placement.</p>
+				<p>Each AssetMetadata element in the list is a container for one key/value pair,
+					where: <ul>
+						<li>the key consists of the namespace and XPath attributes, which identify
+							to an attribute or element in the Cablelabs ADI 3.0 namespace as defined in
+							MD-SP-CONTENTv3.0-I01-100812.</li>
+						<li>the value appearing in the element body is the corresponding value in the
+							identifed metadata document.</li>
+					</ul>
+					These pairs can either define missing metadata values or override existing metadata
+					values, as the are referenced during the placement containing this reference.
+				</p>
+				<p>The ContentMgmt element allows for content readiness checking, based on a
+					delivery window and domain.</p>
+				<p>TrickModeRestriction defines type and viewing rate scale restrictions. In the
+					absence of restrictions all stream controls are permitted.</p>
+				<p>The StateFeedback element provides current statistics with respect to the
+					execution of this asset. This is a primary feedback element. The revision refers
+					to the revision of the parent element.</p>
+				<p>The optional Phase element provides asset-level phase rules.  These MUST be
+					invoked only for phase events 'lost' and 'found'.</p>
+				<p>The assetType identifies the family of the asset, which enables some
+					interpretations of the asset structure without reference to the metadata.</p>
+				<p>The apply attribute indicates the form in which this asset applies to its parent
+				placement.</p>
+				<p>If a sequence attribute is present, it defines the position of this asset with
+					respect to others during presentation timeline. If sequence is omitted, the
+					asset's position in the presentation timeline is undefined. If a set of two or
+					more asset references share a sequence value, each asset's position in the
+					presentation timeline is undefined with respect to other members of that
+					set.</p>
+				<p>Note that an AssetReferenceType contains a RecordIdAttributeGroupOpt (which
+					carries the unique identity of the phase), but no RecordStatusAttributeGroup.
+					This means that an AssetReferenceType is a reportable CIP node, but is not an
+					independent revision set; it is a contained member of its parent revision. If no
+					PEID is present in the AssetReferenceType, it is inherited from the parent
+					Placement. The Epsid MUST always be present.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="AssetMetadata" type="cip:MetadataRefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ContentMgmt" type="cip:ContentMgmtType" minOccurs="0"/>
+			<xs:element name="TrickModeRestriction" type="cip:TrickModeRestrictionType" minOccurs="0"/>
+			<xs:element name="StateFeedback" type="cip:StateFeedbackType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Phase" type="cip:PhaseType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Ext" type="common:ExtType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="assetType" type="cip:AssetTypeType" use="required"/>
+		<xs:attribute name="apply" type="cip:AssetApplicationType" use="required"/>
+		<xs:attribute name="sequence" type="xs:int" use="optional"/>
+		<xs:attributeGroup ref="cip:RecordIdAttributeGroupOpt"/>
+	</xs:complexType>
+	<xs:complexType name="BundleType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Bundle is a recursive element allowing representation of tree structures. These
+					define a set of placements in a specific campaign, at an indicated MSO and
+					syscode. The Placements of the bundle define specific presentation activities that fulfill
+					the campaign. The relationship between the placements that forms the basis of a
+					bundle, as well as the relations implied by a bundle tree structure, are both
+					beyond the scope of this specification, but are typically characterized by
+					the value of ProductFamily as an 'ad product' that has a definition external
+					to this specification. Each placement of the bundle MUST be evaluated
+					independently, except for the specifically defined interactions with attributes
+					of the bundle.</p>
+				<p>CategoryExclusion optionally defines placed asset categories that are restricted with
+					respect to placements of this Bundle.</p>
+				<p>The list of CommonQualifierGroups defines qualifier expressions that MUST be
+					satisified for any placement that is a child of this bundle. Multiple groups are
+					always ANDed, which means that such placements only occur if each group is
+					individually true.</p>
+				<p>The implementation behavior MUST be such that the common qualifiers of a bundle are
+					effectively projected to their placements and evaluated as additional qualifiers
+					of each placement. However, recursive bundles with a concurrency other than 'any' require
+					independent evaluation of their common qualifiers to determine if the concurrency
+					condition is met.</p>
+				<p>The Bundle is uniquely identified by the PEID+EPSID in the
+					RecordIdAttributeGroupReq. Since it also contains a RecordStatusAttributeGroup,
+					it is an updateable element with the required PEID+EPSID identifying the
+					revision set. Updates MUST be applied to a top-level Bundle and replicate the
+					complete tree of active children of that Bundle. A CIP document that contains
+					multiple revisions with the same idenity MUST have those revisions as adjacent
+					elements in decreasing revision number order.</p>
+				<p>CampVer indicates the global revision number of the campaign data from which
+					this Bundle is derived.  Guid and CampVer uniquely identify a set of campaign data.</p>
+				<p>ChildConcurrency attribute identifies the relationship of child placements or
+					bundles of this bundle. If the optional attribute is omitted the default value
+					is 'any'.</p>
+				<p>Ext provides the standard extension mechanism.</p>
+				<p>The Flight provides the earliest and latest dates for this placement, as well as
+					a mask for days and daypart periods within that interval. When multiple Flight
+					entries are present, the Start is the earliest listed, the End is the latest
+					listed, and the days and dayparts are ORed across entries.</p>
+				<p>The guid attribute provides a unique identifer for a campaign, as defined by the
+					CIP owner.</p>
+				<p>The Phase provides bundle level phase rules. Phase in a bundle may use
+					any phase events except 'decision'.  If specified here the phase events 'defined', 'destroyed',
+					'flightBegin', and 'flightEnd', apply as primary events at the bundle level. Although they
+					may also be transfer targets from descendent placement events, they MUST be primary
+					events at the bundle level.   If specified here, the placement-specific phase events 'lost',
+					'found', 'placed', 'placeIAM' and 'placePSN', apply as primary events at the bundle level.
+					Although they may also be transfer targets from descendent placement events they MUST be
+					primary events at the bundle level and be delivered at this Phase for the corresponding
+					event within any descendent placement, asset, or application.</p>
+				<p>Priority serves to provide an ordering within which to select placements. When
+					multiple placements are possible at any given opportunity, the highest-priority
+					placement, or a member of the group of highest-priority placements when there
+					are more than one with that same priority, MUST always be placed in preference
+					to a lower priority. Note that a high priority is a lower numeric value.
+					The priority specified at the Bundle level applies to all child Placements that
+					do not have a priority specified individually.</p>				
+				<p>The ProductFamily attribute identifies an 'ad product' associated with this
+					Bundle. Supplemental external definitions for the product family guide the
+					interpretation of the bundle and its children. This attribute is REQUIRED as of
+					version 3.0 of the CIP specification.</p>
+				<p>SeparationConstraint determines if a placment can be shown more than once, either
+					within a single placement opportunity, or within a single viewer session. When
+					present at the Bundle level, the constraint applies to all Placements of the
+					Bundle that do not include a separationConstraint.</p>
+				<p>The StateFeedback element provides current state and optionaly statistics with respect to the
+					execution of this bundle and all descendants. This is a secondary feedback
+					element.</p>
+				<p>The StwShpData element provides operational data to support the stewardship of
+					the campaign of which this bundle is a component.</p>
+				<p>Updates can only be issued for a top level Bundle and MUST include all its
+					components.  The author of a revised version of a top-level Bundle MUST increment revision and
+					revDat in any element that changed, and also in each level of containing
+					elements to the top level Bundle. Authors must also maintain the recState and
+					recRevoked elements.</p>
+				<p>Note that campOrderOwner and decisionOwner are often distinct. The decisionOwner is
+					intended to be the owner ID for ADS selection purposes, not the ADS ID
+					itself.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="StwShpData" type="cip:StewardshipDataType"/>
+			<xs:element name="CommonQualifierGroup" type="cip:CommonQualifierGroupType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Placement" type="cip:PlacementType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Bundle" type="cip:BundleType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Flight" type="cip:EffectiveDatesDayTimeType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="StateFeedback" type="cip:StateFeedbackType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Phase" type="cip:PhaseType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="CategoryExclusion" type="cip:CategoryExclusionType" minOccurs="0"/>
+			<xs:element name="Ext" type="common:ExtType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="childConcurrency" type="cip:ChildConcurrencyType" use="optional" default="any"/>
+		<xs:attribute name="priority" type="cip:PriorityType" use="required"/>
+		<xs:attribute name="productFamily" type="cip:ProductFamilyType" use="required"/>
+		<xs:attribute name="separationConstraint" type="cip:SeparationConstraintType" use="optional"/>
+		<xs:attribute name="campVer" type="cip:CampaignVersionType" use="required"/>
+		<xs:attribute name="campOrderOwner" type="cip:IdentifierOwnerType" use="required"/>
+		<xs:attribute name="campOrder" type="cip:IdentifierIdType" use="required"/>
+		<xs:attribute name="decisionOwner" type="cip:DecisionOwnerType" use="required"/>
+		<xs:attributeGroup ref="cip:GuidAttributeGroup"/>
+		<xs:attributeGroup ref="cip:RecordIdAttributeGroupReq"/>
+		<xs:attributeGroup ref="cip:RecordStatusAttributeGroup"/>
+	</xs:complexType>
+	<xs:complexType name="CategoryExclusionType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>A control for enforcing product category separation within ad opportunities and
+					viewer sessions.</p>
+				<p>The scope attribute indicates how broad the exclusion test needs to be.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="scope" type="cip:ExclusionScopeType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="CommonQualifierGroupType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>A Boolean qualifier expression. Multiple qualifiers
+					represent enclosed expressions, which are combined with the condition
+					operator.</p>
+				<p>Qualifier is an enclosed expression.</p>
+				<p>Condition is the binary Boolean operator used to combine the qualifiers.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Qualifier" type="cip:QualifierType" maxOccurs="unbounded"/>
+			<xs:element name="Ext" type="common:ExtType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="condition" type="cip:ConditionType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="ContentMgmtType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>This element is used for content (media and data) readiness checking. It defines
+					a content residence window which typically leads than the flight window.  It may
+					optionally supply a domain (normally, a network) as a hint for content server selection.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Ext" type="common:ExtType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="beginRequired" type="xs:dateTime"/>
+		<xs:attribute name="endRequired" type="xs:dateTime"/>
+		<xs:attribute name="deliveryDomain" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="EffectiveDatesDayTimeType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>A container for the attribute group to contain potential attribute name conflicts if an
+				element should require several such groups.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attributeGroup ref="cip:EffectiveDatesDayTimeAttributeGroup"/>
+	</xs:complexType>
+	<xs:complexType name="MetadataRefType" mixed="true">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Container for a Metadata declaration/value pair, with the declaration's namespace
+					and qualifier XPath in the attributes and the declared value in the element
+					body.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent mixed="true">
+			<xs:restriction base="xs:anyType">
+				<xs:attribute name="namespace" type="cip:NamespaceType"/>
+				<xs:attribute name="xpath" type="cip:QualifierPathType"/>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MsoOrderType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>A container for campaign data for a single MSO. This contains sets of bundles for one
+					or more campaigns enclosed within a SysOrder element or an Orders element, but not both.</p>
+				<p>A SysOrder list holds bundles by syscode within the MSO. The SysOrder@syscode
+					MUST be provided to identify the particular syscode.</p>
+				<p>An Orders list holds bundles that apply uniformly to all Syscodes of an
+					MSO. The SysOrder@syscode MUST NOT be supplied.</p>
+				<p>The name is a standardized name of the MSO.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="SysOrder" type="cip:OrderType" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation> One or more collections of bundles for an MSO, per MSO
+							SysCode. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Orders" type="cip:OrderType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation> One collection of bundles that apply globally to
+							all syscodes an MSO. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="Ext" type="common:ExtType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="cip:MsoNameType" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="OrderType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>An Order provides a container for bundles at one or more syscodes
+					within one MSO.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Bundle" type="cip:BundleType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Ext" type="common:ExtType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="syscode" type="common:SyscodeType" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="PhaseType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>The phase type defines one or more sets of of rules to be processsed at the
+					workflow point indicated by the 'event' attribute. When the event of the phase is triggered,
+					each rule selector MUST	be passed to the rules engine along with the phase 
+					identification.</p>
+				<p>The Phase is uniquely identified by the PEID+EPSID in the
+					RecordIdAttributeGroupReq. This identity is passed as implicit arguments to processed rules
+					to identify the context in which the rule is invoked.  Since it also contains a
+					RecordStatusAttributeGroup, it is an updateable element with the required PEID+EPSID
+					identifying the revision set for this and all child elements. If multiple revisions of the same
+					identifier are present, the document order MUST have them as 
+					adjacent elements in decreasing revision number order.</p>				
+				<p>Any triggered phase element MUST
+					be processed by invoking its own process rule selectors and then triggering its
+					ancestor phase nodes.  Ancestor phase nodes are recursively defined as phase elements
+					contained in the parent element that are triggered by the same phase event.</p>
+				<p>Event identifies one of an enumerated set of events in the processing flow of the
+					execution engine at which this phase is to be invoked.</p>
+				<p>ProcessRuleSelector is a set of elements that each supply a set of specific
+					data-processing rule parameters under this phase.  This set may be empty if the only
+				        desired effect is transfering the processing using the parentPeid and parentEpsid attributes</p>
+				<p>Phase permits the phase type to be defined recursively. This would be used, for
+					example, to reflect the hierarchical structure of campaign functions (in a
+					Bundle) or applications (in a Placement). The structure of any such recursion tree MUST be
+					predefined for each product family and member. </p>
+				<p>The parentPhasePeid and parentPhaseEpsid attributes allow a trigger reference to
+					some disjoint phase tree. Those values MUST identify a Phase element contained
+					within the descendent tree of the current top-level bundle. The reference causes all processing
+					references that either begin at the including element or arrive at that element
+					from a child node to continue processing by transfering to the referenced parent node and
+					then to its ancestors.  The phase nodes are scanned up the descendent tree in document order
+					executing only nodes with the same event. This mechanism permits a placement phase triggered
+					from the execution environment to in turn trigger a specific bundle phase.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ProcessRuleSelector" type="cip:ProcessRuleSelectorType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Phase" type="cip:PhaseType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Ext" type="common:ExtType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="event" type="cip:PhaseEventType" use="required"/>
+		<xs:attributeGroup ref="cip:RecordIdAttributeGroupOpt"/>
+		<xs:attributeGroup ref="cip:RecordStatusAttributeGroup"/>
+		<xs:attribute name="parentPhaseEpsid" type="common:EpsidType" use="optional"/>
+		<xs:attribute name="parentPhasePeid" type="common:PeidType" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="PlacementType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Defines a specific placement of one or more advanced advertising assets into an
+					advertising placement opportunity.</p>
+				<p>The list of QualifierGroups defines qualifier expressions that must be satisified
+					for this specific placement. Multiple groups MUST be ANDed, which means the
+					placement occurs only if each group is individually true. If there are common
+					qualifier groups defined for the placement's bundle, they MUST also be ANDed
+					with these groups.</p>
+				<p>AssetReference is a list of audio and video components that are part of this placement.</p>
+				<p>AppReference is a list of application components that are part of this placement.
+					Note that, at present, it is not useful to include more than one AppReference
+					element. This may change in the future.</p>
+				<p>CategoryExclusion optionally defines placed asset categories that are restricted with
+				   respect to this placement.  If a categoryExclusion is defined in a parent bundle
+				   and none is defined in this placement, that exclusion MUST apply as though provided here.
+				   The category or categories defined in the asset metadata
+				   of this placement MUST be considered in tests of related placements even if this
+				   placement does not define an exclusion.</p>
+				<p>The Flight provides the earliest and latest dates for this placement, as well as
+					a mask for days and daypart periods within that interval. When multiple Flight
+					entries are present, the Start is the earliest listed, the End is the latest
+					listed, and the days and dayparts are ORed across entries.</p>
+				<p>The Phase provides placement level phase rules. Phase in a placement may use
+					any phase events.  If specified here, the asset and application-specific phase events 'lost'
+					and 'found', apply as primary events at the placement level.  Although they
+					may also be transfer targets from descendent assets or applications, they MUST also be primary
+					events at the placement level and be delivered at this Phase for the corresponding event within
+					any descendent asset or application.</p>
+				<p>The StateFeedback element provides current state and optionally statistics with respect to the
+					execution of this Placement and all descendants. This is a secondary feedback
+					element.</p>
+				<p>Priority serves to provide an ordering within which to select placements. When
+					multiple placements are possible at any given opportunity, the highest-priority
+					placement, or a member of the group of highest-priority placements when there
+					are more than one with that same priority, MUST always be placed in preference
+					to a lower priority. Note that a high priority is a lower numeric value.</p>
+				<p>The Placement is uniquely identified by the PEID+EPSID in the
+					RecordIdAttributeGroupReq. Since it also contains a RecordStatusAttributeGroup,
+					it is an updateable element with the required PEID+EPSID identifying the
+					revision set for this and all child elements. If multiple revisions of the same
+					identifier are present, The document order MUST have them as 
+					adjacent elements in decreasing revision number order.</p>
+				<p>ProductMember optinally identifies role of the placement in the ad unit being expressed.
+					There may be supplemental operational definitions under which the execution
+					engine's expectation of the data structure and content of a placement may by
+					conditioned by the ProductMember.</p>
+				<p>SeparationConstraint determines if a placment can be shown more than once, either
+					within a single placement opportunity, or within a single viewer session. If
+					absent no such constraint exists.</p>
+				<p>TrickModeRestriction defines type and viewing stream control restrictions. In the
+					absence of restrictions, all stream controls are permitted. The Placement
+					restrictions apply to all assets, unless the asset has a distinct restriction of
+					its own.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="QualifierGroup" type="cip:QualifierGroupType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="AssetReference" type="cip:AssetReferenceType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="AppReference" type="cip:AppReferenceType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Flight" type="cip:EffectiveDatesDayTimeType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="TrickModeRestriction" type="cip:TrickModeRestrictionType" minOccurs="0"/>
+			<xs:element name="StateFeedback" type="cip:StateFeedbackType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Phase" type="cip:PhaseType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="CategoryExclusion" type="cip:CategoryExclusionType" minOccurs="0"/>
+			<xs:element name="Ext" type="common:ExtType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="productMember" type="cip:ProductMemberType" use="optional"/>
+		<xs:attribute name="priority" type="cip:PriorityType" use="required"/>
+		<xs:attribute name="separationConstraint" type="cip:SeparationConstraintType" use="optional"/>
+		<xs:attributeGroup ref="cip:RecordIdAttributeGroupReq"/>
+		<xs:attributeGroup ref="cip:RecordStatusAttributeGroup"/>
+	</xs:complexType>
+	<xs:complexType name="ProcessRuleSelectorType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>ProcessRuleSelector defines one set of parameters for the aggregator and rules
+					engine that selects and performs one data process associated with the phase
+					and phase event.</p>
+				<p>Arg is an argument to be supplied to the aggregator or rules engine along with the process rule.
+					Args have an actual name in the 'variable' attribute and a value in the mixed
+					content body. The actual name is matched to a formal name in the rule
+					definition and the value of the arg MUST be substituted for that formal name in the
+					rule invocation.</p>
+				<p>RuleRepository is the URL of the repository that contains the rule to be invoked.</p>
+				<p>RuleId is the repository-specific ID for the rule to be invoked. (This field was
+					named epType in versions D03 to 1.1.)</p>
+				<p>RuleVersion is the version number of the identified rule.  If omitted or supplied as
+					"0", the lastest version MUST be used.</p>
+				<p>The complete and unique rule identifier is formed from as a composite URL consisting
+					of the concatenation of ruleRepository URL, "/", the RuleId, "." and the version
+					number.  If the version is supplied or defaulted as "0", the execution engine MUST
+					subsitute the highest version of the rule that is defined.</p>
+				<p>The StateFeedback element provides current state and statistics with respect to the
+					ability to execute this process rule. This is a primary feedback element.</p>
+				<p>Sequence holds an optional ordinal value (one or greater) that defines rule evaluation
+					order within a Phase or other multi-rule container. All rules that have a sequence value
+					SHALL be processed in ascending sequence order, followed by the set of remaining rules
+					that do not have a sequence value processed in any order.</p>
+				<p>Ext is supplied to allow attributes to be added in the same form as those
+					currently defined.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Arg" type="cip:ArgRefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="StateFeedback" type="cip:StateFeedbackType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Ext" type="common:ExtType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="ruleRepository" type="xs:anyURI" use="required"/>
+		<xs:attribute name="ruleId" type="xs:string" use="required"/>
+		<xs:attribute name="ruleVersion" type="xs:int" use="optional" default="0"/>
+		<xs:attribute name="sequence" type="xs:integer" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="QualifierGroupType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>A Boolean qualifier expression that is evaluated for a placement and ANDed with
+					the bundle's commonQualfier groups. Multiple qualifiers within the group are
+					enclosed expressions, and MUST be combined with the condition operator.</p>
+				<p>Qualifier supplies an enclosed expression.</p>
+				<p>condition is the binary Boolean operator used to combine the enclosed
+					expressions.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Qualifier" type="cip:QualifierType" maxOccurs="unbounded"/>
+			<xs:element name="Ext" type="common:ExtType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="condition" type="cip:ConditionType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="QualifierType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>A container for a set of one or more Boolean terms. If the container holds more
+					than one term, the value of the container MUST be the AND of all the contained
+					terms.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Term" type="cip:TermType" maxOccurs="unbounded"/>
+			<xs:element name="Ext" type="common:ExtType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StateFeedbackStatisticsType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Provides a request for (when published) or actual current (when returned) statistics
+					with respect to the execution of this placement or bundle and all descendants. The 
+					statistics are typically issued only when non-empty, and not repeated in subseqeuent
+					reports unless the set of contained values has changed.</p>
+				<p>The sequence of Statistic elements conveys the set of feedback statistics. When published
+					each Statistic element MUST have a valid, defined, datamap and variable reference in
+					an empty element. The runtime implementation is responsible for evaluating
+					that variable and inserting the result in the body of the statistic element.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Statistic" type="cip:StatisticsRefType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Ext" type="common:ExtType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StateFeedbackType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>When included in a published CIP, this type explicitly requests feedback on the operational
+					and execution state of the parent CIP element. This does not preclude alternate, external methods
+					of making such requests and providing similar controls.</p>
+				<p>When this type is included in a CIP returned
+					to the publisher it supplies feedback on the state of CIP operations with respect
+					to a single Syscode, a specific element, and a specific revision of that element.</p>
+				<p>StateFeedback may be a primary or secondary element. Primary elements report on
+					specific readiness of actions. Secondary elements summarize the readiness of
+					their primary or secondary children.</p>
+				<p>For any summary state element that is reported, all primary and secondary state feedback that
+                    contributes to that summary MUST be collected or evaluated, whether or not it is reported.</p>
+				<p>revision is the revision number of the parent element whose status is requested
+					or reported. Multiple feedback elements MAY be included for a parent element, 
+					provided each is for a distinct revision.</p>
+				<p> There are four cases that trigger reporting of a StateFeedback element, as follows.
+					<ul>
+						<li>A requested primary StateFeedback element must always be be reported whenever a value in
+							that element changes unless that element has a non-zero reportInterval.</li>
+						<li>If a requested primary StateFeedback element is received with a reportAsOf attribute and no
+							reportInterval (or one with a value of zero) a single report must be created
+							immediately if the reportAsOF time is in the past and no report has been generated
+							since, or at the reportAsOF time if it is in the future and no report is generated
+							from case (1) by that time. Subsequent reports are only generated by case (1).</li>
+						<li>If a requested primary or secondary StateFeedback element is received with a reportAsOf attribute
+							and a non-zero reportInterval a report must be generated immediately if the reportAsOF
+							time is in the past or at the reportAsOf time if it is in the future, and at every
+							subsequent time of "(reportAsOf + (n * reportInterval)) for all n less than
+							reportEndTime or flight end time of reportEndTime = 0" after that time.
+							Reporting under case (1) is suspended when interval reporting is in effect.</li>
+						<li>A secondary Statefeedback element is always reported whenever any descendent child
+							primary Statefeedback element is reported.  Additionally, it may reported on an interval
+							basis as described above. However when both conditions are met at a give report time,
+							only one report is created.</li>
+					</ul>
+				</p>
+				<p>reportAsOf is used by the CIP publisher to control state feedback reporting for this CIP
+					version. See the reporting trigger definitions, above for details.</p>
+				<p>reportEndTime is used by the CIP publisher to control state feedback reporting for this CIP
+					version. See the reporting trigger definitions, above for details.</p>
+				<p>reportInterval is used by the CIP publisher to control state feedback reporting for this CIP
+					version. See the reporting trigger definitions, above for details.</p>
+				<p>recState is <strong>PROHIBITED</strong> in a published CIP, and
+					<strong>REQUIRED</strong> in a state-feedback CIP. recState conveys the CIP
+					subscriber's current status with respect to this bundle or placement. In
+					contrast to a recState published in a Bundle or Placement, which reflects a
+					<em>desired or intended state</em>, the recState returned here represents an
+					<em>actual, current state</em>.</p>
+				<p>mediaState summarizes the state of all content management that applies, using the
+					conditions of the content's ContentMgmt element. For a placement, it is a
+					summary of all the AssetReference and AppReference elements in the placement.
+					For a bundle, it is a summary of the mediaState of all the bundles and
+					placements contained in the bundle.</p>
+				<p>executionState summarizes the state of the set of all system components that are
+					required to implement this bundle or placement, inclusive of that state for all
+					bundle or placement children. The definition of the set of components is <em>all
+					and only those components upon which the complete and successful execution
+					of this specific bundle or placement depends</em>. Examples might include
+					the decision system, aggregator, and subscriber information system.</p>
+				<p>In a published CIP, Statistics contains a list of requested statistics, whose
+					body values are empty. In a returned CIP, Statistics contains that same list
+					with each Statistic's body value supplied.</p>
+				<p>The optional Notes element can provide supplemental detail.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Statistics" type="cip:StateFeedbackStatisticsType" minOccurs="0"/>
+			<xs:element name="Notes" type="xs:string" minOccurs="0"/>
+			<xs:element name="Ext" type="common:ExtType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="revision" type="cip:ElementRevisionNumberType" use="required"/>
+		<xs:attribute name="reportAsOf" type="xs:dateTime" use="optional"/>
+		<xs:attribute name="reportEndTime" type="xs:dateTime" use="optional"/>
+		<xs:attribute name="reportInterval" type="xs:duration" use="optional"/>
+		<xs:attribute name="recState" type="cip:ElementStateType" use="optional"/>
+		<xs:attribute name="mediaState" type="cip:MediaStatesType" use="optional"/>
+		<xs:attribute name="executionState" type="cip:ExecutionStatesType" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="StewardshipDataType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>The Contact list provides one or more contacts for operational assistance.
+					Contact roles can help in selecting the correct contact.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Contact" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:attributeGroup ref="cip:ContactAttributeGroup"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Ext" type="common:ExtType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TermType" mixed="true">
+		<xs:annotation>
+			<xs:documentation>
+				<p>An individual Boolean qualifier term which is part of a Boolean expression. The
+					term provides a Boolean result from an operation on two values; an lvalue and
+					an rvalue. The lvalue is the contents of either a rule datamap variable reference
+					or a document field reference. A rule reference MUST consist of a datamap and a
+					variable. A document reference MUST consist of a source, a namespace, and an 
+					xpath.</p>
+				<p>The evaluation environment constructs the lvalue by fetching the value identified
+					by the reference. It then compares that with the rvalue, which is contained in
+					the body of the element. The comparison is subject to
+					the semantics of the qualifier's datatype, and the comparison function is
+					defined by the operation. The result is a Boolean value representing the value
+					of the term in the expression.</p>
+				<p>source is an optional identification of the source document to reference or
+					identifies the source as a rule data source. If omitted, the default is a placed
+					asset. If used in a context where a single placed asset reference is not
+					implicit, an appropriate value is required.</p>
+				<p>namespace is either a value from a predefined set of namespaces in Annex A of the
+					CIP specification (which have implementations in each execution environment), a
+					document source, or a specific data store name for a data source.</p>
+				<p>xpath is a legal xpath within the identified namespace to a data element
+					that exists in the metadata document identified by the source.</p>
+				<p>datamap is the name of a defined, persistent, rule datamap known to the execution
+					environment.</p>
+				<p>variable is the name of a name/value pair that currently exists in the identified
+					datamap.</p>
+				<p>operation is binary Boolean operator describing a required relation for this
+					qualifier. The semantics of the
+					comparison are those normal to XML for the datatype of the qualifer.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent mixed="true">
+			<xs:restriction base="xs:anyType">
+				<xs:attribute name="operation" type="cip:OperationType" use="required"/>
+				<xs:attribute name="source" type="cip:QualifierSourceType" use="optional"/>
+				<xs:attribute name="xpath" type="cip:QualifierPathType" use="optional"/>
+				<xs:attribute name="namespace" type="cip:NamespaceType" use="optional"/>
+				<xs:attribute name="variable" type="cip:VariableNameType" use="optional"/>
+				<xs:attribute name="datamap" type="cip:DatamapNameType" use="optional"/>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TrickModeExclusionType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Defines one particular trick mode exclusion composed of a type and, for
+					type="trick", a speed scaling factor or range of factors. The scale factor is
+					the ratio of the play speed to normal play speed; forward speeds are positive,
+					and backward speeds are negative.</p>
+				<p>Normal is forward at an implied scale of 1.0, and that combination is always
+					explicit (i.e., normal play is never an implied part of a trick range).</p>
+				<p>Trick is a multiple of normal play speed, signed for forward or reverse. Trick
+					0.0 describes no play (i.e., pause).</p>
+				<p>Jump is a navigational notation used for transitions such as "digital rewind" or
+					"go to chapter". It does not have a speed.</p>
+				<p>All is all trick modes, but excludes normal play.</p>
+				<p>If present, lowertest and uppertest are applied when evaluating the scale value.
+				    The default tests are "ge" for lowertest and "le" for uppertest.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="type" type="cip:TrickModeType" use="required"/>
+		<xs:attribute name="scale" type="cip:SpeedScaleType"/>
+		<xs:attribute name="lowertest" type="cip:LowerTestType"/>
+		<xs:attribute name="uppertest" type="cip:UpperTestType"/>
+	</xs:complexType>
+	<xs:complexType name="TrickModeRestrictionType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Trick Mode Restriction Type defines type and viewing rate scale restrictions.
+					Note that, for each Trick Mode Restriction, all trick modes are initially
+					permitted, less those explicitly excluded below. Restrictions on placements are
+					applied to all AssetRefs. If restrictions are specified on both the placement
+					and AssetRef, they are combined.</p>
+				<p>Optional trick mode restriction rule. If we are within the effective
+					period as defined by EffectiveDatesDayTimeAttributeGroup, any rule that
+					is present is evaluated, with the PEID and Epsid of the parent Asset
+					or Placement supplied as implicit arguments. The rule will set the reserved
+					variable 'datamap = "cablelabs.safi" variable="PEID.EPSID.trickmode.apply"'
+					to true if the trick mode restriction is to be applied and
+					false otherwise. This variable MUST be tested by the execution environement
+					to determine if the restriction to be applied.  Note that the PEID and EPSID
+					strings in the reserved variable name represent the actual PEID and Epsid of
+					the parent Asset or Placement.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="TrickModeExclusion" type="cip:TrickModeExclusionType" maxOccurs="unbounded"/>
+			<xs:element name="TrickModeRestrictionRule" type="cip:ProcessRuleSelectorType" minOccurs="0"/>
+			<xs:element name="Ext" type="common:ExtType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="cip:EffectiveDatesDayTimeAttributeGroup"/>
+		<xs:anyAttribute namespace="##any" processContents="lax"/>
+	</xs:complexType>
+	<!-- Simple Types -->
+	<xs:simpleType name="AppTypeType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Identifies the form of the applicaiton defined in a reference. This enables some decisions
+					to be made about the application structures prior to placement, and without requiring
+					reference to the associated metadata.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="CoDFFile|CoDFData|private:.+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AssetApplicationType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Defines how an application or asset applies to its parent placement.</p>
+				<p>validate means to ensure at preflight that the content is present as defined.</p>
+				<p>place means that this content is part of the placement response data set, but it
+					does not get preflight validation.</p>
+				<p>valAndPlace means that the content should be validated at preflight, and is also a
+					part of the placement response data set.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="validate|place|valAndPlace|private:.+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AssetTypeType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Identifies the kind of asset defined in a reference. This enables some decisions
+					to be made about the asset structures prior to placement, and without requiring
+					reference to the associated metadata.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="media|private:.+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CampaignCreationDateType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>The date and time the initial revision of the Campaign Information Package was
+					created.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<xs:simpleType name="CampaignRevisionDateType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>The date and time the specified revision of the Campaign Information Package was
+					created.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<xs:simpleType name="CampaignVersionType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Campaign version number. The version number is incremented as the campaign
+					definition data is changed after publication. After any increment, the revision
+					number MAY be retained until the next publication.</p>
+				<p>Campaign references with the same revision number MUST contain the same data.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="common:NonNegativeIntType"/>
+	</xs:simpleType>
+	<xs:simpleType name="ChildConcurrencyType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Defines a constraint on child placements or bundles of the bundle in which this
+					attribute appears. A placement MUST be defined as effective if its qualifiers
+					are true. A bundle MUST be defined as effective if any of its
+					placements or bundles are effective. Then:</p>
+				<ul>
+					<li>A child concurrency of "any" indicates that each effective child MUST be
+						evaluated independently.</li>
+					<li>A child concurrency of "first" requires that each child be tentatively
+						evaluated individually, and the first (in document order) that is effective
+						MUST be confirmed; any following (in document order) MUST be disallowed.
+						This selection can result in zero or one effective children, but not more.
+						The actual placements are known to be at least one, but possibly more, for
+						each effective child.</li>
+					<li>A child concurrency of "all" requires that each child be tentatively
+						evaluated individually. If all children are effective, all MUST be
+						confirmed; otherwise, all MUST be disallowed. Again, it is known that all
+						children are effective and each results in at least one, but possibly more,
+						placements.</li>
+				</ul>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="any|all|first|private:.+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ConditionType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>A set of Boolean binary operators defined on qualifier terms with a group.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="and|or|private:.+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ContactNameType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>The name of a contact available for resolving issues with a campaign.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="common:NonEmptyStringType">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ContactRoleType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>The role in the campaign workflow represented by a contact.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="common:NonEmptyStringType">
+			<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ContextIdType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Value supplied in a message and echoed in the response to identify matched
+					message sets. Use of a UUID or similar unique identifier is recommended.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="40"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DatamapNameType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>A name string for a datamap in the current rule environment. The CIP only
+					contains external datamap references, so the named map must exist out of
+					rule-scope.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="common:NonEmptyStringType"/>
+	</xs:simpleType>
+	<xs:simpleType name="DecisionOwnerType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Identifies the owner of the placement decision. The value MUST be either: a) a
+					valid URL as defined in IdentifierOwnerType, or b) one of the following two
+					reserved text strings which reflect SCTE-35 signaling options:</p>
+				<ul>
+					<li>urn:cablelabs.safi.decision-owner.scte35-provider</li>
+					<li>urn:cablelabs.safi.decision-owner.scte35-operator</li>
+				</ul>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="cip:IdentifierOwnerType"/>
+	</xs:simpleType>
+	<xs:simpleType name="ElementRevisionDateType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>The date and time this revision of the element was created.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<xs:simpleType name="ElementRevisionNumberType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>A revision number of an element. Implementations MUST increment the revision
+					number whenever any data within an identified element (other than revision group
+					data) is changed. For each element with an ElementRevisionNumber, only the
+					record with the highest revision number currently applies, and normally only
+					that record is distributed. Any other records need to be requested.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="common:NonNegativeIntType"/>
+	</xs:simpleType>
+	<xs:simpleType name="ElementStateType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>The current status of an Element's data model. This MUST be one of the following
+					enumerated values:</p>
+				<ul>
+					<li>Pending (pnd): Data is present, but is not necessarily an
+						operationally-complete or consistent set.</li>
+					<li>Committed (com): Data is present, and is an operationally-complete and
+						consistent set, though not necessarily final (data may be modified, even
+						when active).</li>
+					<li>Active (act): The data present is intended to be operational and the line
+						item should be executed according to the contained parameters. This is a
+						statement of intent, not the result of operational feedback. </li>
+					<li>Pause (pse): Presentations MUST NOT be made based on this element. This is a
+						temporary state that SHOULD return to Active, but MAY instead go to
+						Windup.</li>
+					<li>Windup (wnd): Presentations MUST NOT be started based on this element, but
+						post-processing functions are permitted to continue. This is a temporary
+						state that SHOULD go to Closed.</li>
+					<li>Closed (cls): All activity with respect to the line item is terminated.</li>
+				</ul>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="pnd|com|act|pse|wnd|cls|private:.+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EmailAddressType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>The email address of a stewardship contact.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ExclusionScopeType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Indicates whether an exclusion rule should be enforced within a group of opportunities, such as
+					defined in the ADI 3.0 Placement Opportunity by group index, within a single break, or within
+					the entire viewer session.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="group|opportunity|session|private:.+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ExecutionStatesType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Identifies the summary state of all execution resources necessary for this
+					element.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="notReady|processing|ready|private:.+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IdentifierIdType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Generic owner identifier. Identifiers MUST be unique within the namespace of
+					their owner identifier. The CipOrder attribute, derived from this, identifies
+					the order from which this CIP is derived.</p>
+				<p>This value is strictly an identifier and has meaning only in the environment of
+					the CIP publisher.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="common:NonEmptyStringType">
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IdentifierOwnerType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>All identifier owners MUST be set to a registered Internet domain name or a
+					qualified domain name that is rooted in a registered Internet domain name
+					belonging to the provider of the identifier.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:anyURI">
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LowerTestType">
+		<xs:annotation>
+			<xs:documentation>The LowerTestType provides a floor by stipulating the value must be &gt;, &gt;= or private:*</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="gt|gteq|private:.+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MediaStatesType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Identifies the readiness state of a media reference.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="unknown|processing|ready|private:.+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MsoNameType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>A unique name assigned to an MSO and present in all the MSO orders or queries for
+					that MSO.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="common:NonEmptyStringType">
+			<xs:maxLength value="30"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NamespaceType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>One of the predefined values for a qualifier namespace as listed in Annex A of
+					the CIP specification. Each namespace identifies a data model with a set of
+					predefined xpaths, each of which has a known datatype and semantic
+					definition.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="common:NonEmptyStringType"/>
+	</xs:simpleType>
+	<xs:simpleType name="OperationType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Binary operator defined on two operands, a left and a right, and a datatype.
+					The specific semantics of the operations are defined by the datatype.</p>
+				<ul>
+					<li>eq is true if the left operand and the right operand are equal</li>
+					<li>ne is true if the left operand and the right operand are not equal</li>
+					<li>lt is true if the left operand is less than the right operand</li>
+					<li>gt is true if the left operand is greater than the right operand</li>
+					<li>le is true if the left operand is less than or equal to the right operand</li>
+					<li>ge is true if the left operand is greater than or equal to the right
+						operand</li>
+					<li>contains is undefined for a left operand of type other than String. It is
+						functionally equivalent to Java String.contains(), and is true if the left
+						operand (the string to be scanned) contains the right operand (the string to
+						be looked for).</li>
+				</ul>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="eq|ne|lt|gt|le|ge|contains|private:.+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PhaseEventType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Identifies the point in the CIP execution environment processing flow that a phase
+					is to be invoked. The points are as follows:</p>
+				<ul>
+					<li>decision - applies to a specific CIP version of a placement. It represents each
+						evaulation of the candidate within the decision process for an opportunity.
+						The placement will typically have normal qualifiers, and qualifier evaluation
+						is presumed to be applied first to help reduce the pool of candidates that
+						require rule evaluation. Consequently the interaction of the rule with the
+						placement evaluation logic is presumed not to be through a datamap value (as
+						they would already have been evaulated), but to be internal, with the Boolean
+						value resulting meaning "this is (true) or is not (false) a placement
+					        eligible message".</li>
+					<li>defined - applies to a specific CIP version of a bundle or placement. It
+						represents the initial receipt of a that specific CIP version of a bundle or
+						placement.</li>
+					<li>destroyed - applies to a specific CIP version of a bundle or placement. It
+						represents the local change of recState to "closed" (as reported in
+						StateFeedback) for that bundle or placement.</li>
+					<li>found - applies only to an assset or application reference, and represents the
+						first test for presence within the owning placement that found the asset or
+						application in existence.</li>
+					<li>lost - applies only to an assset or application, and represents the first test
+						for presence within the owning placement that found the asset or application
+						<em>not</em> in existence when it was last known to be in
+						existence.</li>
+					<li>flightBegin - applies to a specific CIP version of a bundle or placement. It
+						represents the local change of recState to "active" (as reported in
+						StateFeedback) for that bundle or placement.</li>
+					<li>flightEnd - applies to a specific CIP version of a bundle or placement. It
+						represents the local change of recState from "active" to either "windup"
+						or "closed" (as reported in StateFeedback) for that bundle or
+						placement.</li>
+					<li>placed - applies only to a Placement, and represents the completion of a
+						successful placement for the owning element by the local decision
+						system.</li>
+					<li>placePSN - applies only to Placement, and represents the receipt of a PSN
+						message for the owning element by the local decision system.</li>
+					<li>placeIAM - applies only to Placement, and represents the receipt of an IAM
+						message for the owning element by the local decision system.</li>
+				</ul>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="decision|defined|destroyed|found|lost|flightBegin|flightEnd|placed|placeIAM|placePSN|private:.+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PriorityType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>A value defining an ordering for placements. Lower numeric values represent
+					higher priorities, with 1 being the highest.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:long">
+			<xs:minInclusive value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ProductFamilyType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>This is one of set of known product families defined in external implementation 
+					guidelines. It is used for stewardship functions, and can also condition the 
+					required structure and content of the CIP in ways that can be relied upon by
+					the execution environment.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="ProductMemberType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>This is one of a predefined set of known members for a specific product family
+					defined in external implementation guidelines.
+					It is used for stewardship functions, and can also condition the required
+					structure and content of the CIP in ways that can be relied upon by the
+					exeuction environment.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="QualifierPathType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>An XPath string or a specific predefined name string selecting a data element of
+					an identified namespace.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="common:NonEmptyStringType"/>
+	</xs:simpleType>
+	<xs:simpleType name="QualifierSourceType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Identifies a document source for a qualifier reference. Current options are:</p>
+				<ul>
+					<li>ent is an entertainment asset</li>
+					<li>placed is a placed asset</li>
+					<li>private:.+ is a private data-source domain</li>
+				</ul>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="ent|placed|private:.+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RecordRevokedFlagType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>True indicates the containing record is deprecated. A higher revision might
+					exist, with the flag false representing more current data. There MUST NOT be any
+					higher revision with the flag false if the record is deleted. At least one
+					update MUST be issued with the flag false when a record is deleted rather than
+					revised; the record MAY then be omitted from further distributions.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="RepositoryAppKeyType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Identifies a complete application. This is a key to access the application characterization in the
+					application repository.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:anyURI"/>
+	</xs:simpleType>
+	<xs:simpleType name="SeparationConstraintType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Constrains a placement to be separated (i.e, precludes it from being shown more
+					than once) either within within a group of opportunities, such as
+					defined in the ADI 3.0 Placement Opportunity by group index, a single placement
+					opportunity, or within a single viewer session. If omitted, the default behavior
+					is to preclude adjacent placement in the same opportunity.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="group|opportunity|session|private:.+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SpeedScaleType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>One optionally-signed decimal number with two optional decimal places
+					representing transport speed, with the normal play transport speed defined
+					being 1.0.  It is optionally followed by a comma and a second value
+					to indicate a range of speeds. The minimum absolute value is zero, the maximum
+					absolute value is 100, and the resolution is 0.01.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="common:NonEmptyStringType">
+			<xs:pattern value="[+-]?(100|([0-9]{1,2})(\.[0-9]{1,2}))(,[+-]?(100|([0-9]{1,2})(\.[0-9]{1,2})))?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="StatisticsRefType" mixed="true">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Container for a statisics variable reference/name pair, with the reference's
+					datamap and variable in the attributes and the value, if present, in the body.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent mixed="true">
+			<xs:restriction base="xs:anyType">
+				<xs:attribute name="datamap" type="cip:DatamapNameType" use="optional"/>
+				<xs:attribute name="variable" type="cip:VariableNameType" use="optional"/>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="TrickModeType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Trick-mode type identifier. Play is always used with a scale or scale range. Key
+					use cases are:<br/> 1) enter in normal play, where the viewer can pause or
+					"rewind", meaning reverse play; and<br/> 2) once entered, the viewer can only
+					watch at normal play, or pause. The play modes are as follows:</p>
+				<ul>
+					<li>Normal play has an implied speed of 1.0, and that value is never restricted:
+						1.0 is never an implied part of any type, including trick speeds which span
+						1.0.</li>
+					<li>'pause' has an implied speed of 0.0, and that value is only explicit with
+						the pause type: 0.0 is never implied as part of 'all', or of trick speeds
+						which span 0.0.</li>
+					<li>'trick' represents a range of presentation speeds across both directions.
+						'Trick' always excludes pause or normal, even if the values of 0.0 or 1.0
+						are enclosed in the range.</li>
+					<li>'jump' is navigational notation, not a transport direction, such as "digital
+						rewind" or "go to chapter".</li>
+					<li>'all' refers to every play and jump mode <em>except</em> normal play and
+						pause</li>
+					<li>The prefix 'private:" refers to a private model for both type and
+						speed.</li>
+				</ul>
+				<p>Trick type examples:</p>
+				<pre>
+		      TYPE   SCALE
+		      trick  0.0,100         refers to all forward play except normal play (never implies pause)
+		      trick  0.01,100        refers to all forward play except normal play
+		      trick  2.01,100        refers to forward play greater than 2x
+		      trick -100,100         refers to all foward and reverse play except normal play and pause
+		      
+		      trick -100,-1.01 and
+		      trick -0.99,100        refer to all foward and reverse play except explicitly omitted reverse 
+		                             normal play and implicitly omitted normal play and pause.
+		    </pre>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="trick|jump|all|pause|private:.+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UpperTestType">
+		<xs:annotation>
+			<xs:documentation>upperTestType provides a ceiling by stipulating the value must be &lt;, &lt;= or private:*</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="lt|lteq|private:.+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UuidNameType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Human-readable name associated with every UUID to allow meaningful communication.
+					This should be chosen to have a very low probability of duplication, but
+					uniqueness is not testable, so is not required.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="common:NonEmptyStringType">
+			<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VariableNameType">
+		<xs:annotation>
+			<xs:documentation>
+				<p>A name string for one of the actual arguments of a rule invocation.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="common:NonEmptyStringType"/>
+	</xs:simpleType>
+	<!-- Attribute Groups -->
+	<xs:attributeGroup name="ApplicationDefinitionAttributeGroup">
+		<xs:annotation>
+			<xs:documentation>
+				<p>The attribute set for characterizing an application. The repositoryAppKey
+					characterizes an application according to the specification format, and the
+					OrgID, AppID, and version identify a specific expression of that repository
+					template held in the application repository. AppId/orgId/appVer are a set, all
+					present or absent. Either that set or appDataReference, or both, MUST be present
+					for the applicationDefinition to be valid.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="appOrgId" type="xs:string" use="optional"/>
+		<xs:attribute name="appAppId" type="xs:string" use="optional"/>
+		<xs:attribute name="appVer" type="xs:unsignedInt" use="optional"/>
+		<xs:attribute name="appDataReference" type="cip:RepositoryAppKeyType" use="optional"/>
+	</xs:attributeGroup>
+	<!-- BundleSelectorGroup replaces CipSelectorGroup -->
+	<xs:attributeGroup name="BundleSelectorGroup">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Defines selection criteria for Bundle data to be returned in a ReadRequest. The
+					ReadResponse returns zero or more top-level Bundles that satisfy all the
+					supplied selection criteria. Omitted criteria do not restrict the returned set,
+					except as specifically noted. All child components are included for each
+					top-level Bundle selected.</p>
+				<p>A specific campaign can be selected by one of a guid or gname or order number +
+					orderOwner; otherwise, orderOwner alone selects all campaigns associated with
+					the owner.</p>
+				<p>revision refers to the Bundle revision. If omitted or zero, revision selects the
+					latest version; a specific version may be identified, and a version of -1
+					selects all versions.</p>
+				<p>revDateFrom and revDateTo select a window of revision dates for the Bundle.</p>
+				<p>A specific top-level Bundle can be requested by PEID+EPSID.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="guid" type="common:UuidUrlType"/>
+		<xs:attribute name="gname" type="cip:UuidNameType"/>
+		<xs:attribute name="campOrder" type="cip:IdentifierIdType"/>
+		<xs:attribute name="campOrderOwner" type="cip:IdentifierOwnerType"/>
+		<xs:attribute name="revision" type="cip:ElementRevisionNumberType" default="0"/>
+		<xs:attribute name="revDateFrom" type="cip:ElementRevisionDateType"/>
+		<xs:attribute name="revDateTo" type="cip:ElementRevisionDateType"/>
+		<xs:attribute name="peid" type="common:PeidType"/>
+		<xs:attribute name="epsid" type="common:EpsidType"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="ContactAttributeGroup">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Describes one operational contact. Note that one of phone or email MUST be
+					present. ContactAttributeGroup has the following attributes:</p>
+				<ul>
+					<li>name (required) is the name of a person or group that can respond to issues
+						appropriate to the related role</li>
+					<li>role (required) identifies the area of responsibility of the person or group
+						identified in "name"</li>
+					<li>phone (optional) is a contact phone number for "name"</li>
+					<li>email (optional) is a contact email address for "name"</li>
+				</ul>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="name" type="cip:ContactNameType" use="required"/>
+		<xs:attribute name="role" type="cip:ContactRoleType" use="required"/>
+		<xs:attribute name="phone" type="common:PhoneNumberType" use="optional"/>
+		<xs:attribute name="email" type="cip:EmailAddressType" use="optional"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="EffectiveDatesDayTimeAttributeGroup">
+		<xs:annotation>
+			<xs:documentation>Effective dates, days and times.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="startDateTime" type="xs:dateTime">
+			<xs:annotation>
+				<xs:documentation>
+					<p>If present, the date/time this reference is active. startDateTime and
+						endDateTime are optional values; however, if they are present, the
+						startDateTime and endDateTime MUST be evaluated prior to evaluating any
+						other attribute in this section. This attribute group can take several
+						forms:</p>
+					<ul>
+						<li>Omitting this attribute group indicates that the reference is active for
+							the lifetime of the entry.</li>
+						<li>Start-only entries become active when the start date/time is
+							reached.</li>
+						<li>End-only entries are active until the end date/time is reached.</li>
+						<li>Start/end entries are active from the start date/time, and are active
+							until the end date/time is reached.</li>
+					</ul>
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="endDateTime" type="xs:dateTime">
+			<xs:annotation>
+				<xs:documentation>
+					<p>If present, the date/time this reference becomes inactive.</p>
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="mon" type="xs:boolean" default="true">
+			<xs:annotation>
+				<xs:documentation>
+					<p>Effective days of the week. Each day of the week is represented by an
+						independent Boolean value. By default, all days are active; set a day to
+						false to make the entry inactive for that day.</p>
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="tue" type="xs:boolean" default="true"/>
+		<xs:attribute name="wed" type="xs:boolean" default="true"/>
+		<xs:attribute name="thu" type="xs:boolean" default="true"/>
+		<xs:attribute name="fri" type="xs:boolean" default="true"/>
+		<xs:attribute name="sat" type="xs:boolean" default="true"/>
+		<xs:attribute name="sun" type="xs:boolean" default="true"/>
+		<xs:attribute name="startTime" type="xs:time">
+			<xs:annotation>
+				<xs:documentation>
+					<p>Start time of day for being active. For example, 09:00:00 represents 9:00am
+						local time; 09:00:00Z represents 9:00 am UTC; and 09:00:00-06:00 applies an
+						offset. If startTime is omitted, the entry is effective for the entire days
+						listed based on local time. If you wish to use UTC time to represent the
+						entire day, specify a start time of 00:00:00Z with a duration of
+						23:59:59.</p>
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="duration" type="xs:duration">
+			<xs:annotation>
+				<xs:documentation>
+					<p>Effective duration of time from the start time. If duration is supplied and
+						startTime is omitted, duration MUST be ignored. Note that duration can
+						extend into the next day. If an end date/time is specified, it MUST be
+						observed when calculating the actual end time based on startTime and
+						duration, and supersedes the duration attribute.</p>
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="GuidAttributeGroup">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Attribute group for all GUIDs. This includes the unique UUID and also a
+					human-readable name.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="guid" type="common:UuidUrlType" use="required"/>
+		<xs:attribute name="gname" type="cip:UuidNameType" use="optional"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="MsgResultAttributeGroup">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Attribute group for most message result status.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="msgResult">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="OK">
+						<xs:annotation>
+							<xs:documentation>
+								<p>Accepted</p>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="NOTOK">
+						<xs:annotation>
+							<xs:documentation>
+								<p>Rejected, but with no information about content validity.</p>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="FAIL">
+						<xs:annotation>
+							<xs:documentation>
+								<p>Rejected because the content is invalid.</p>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="RecordStatusAttributeGroup">
+		<xs:annotation>
+			<xs:documentation>
+				<p>Group describing a revision set and the currency of the document element and its
+					children. Any element with a RecordStatusAttributeGroup MUST also have a
+					RecordIdAttributeGroupReq whose PEID+EPSID are the unique identifier for the
+					revision set.</p>
+				<p>In a document, multiple elements of the revision set MUST be ordered by
+					decreasing revision number.</p>
+				<p>recstate indicates the expected processing state of the revision set.</p>
+				<p>The recRevoked flag indicates whether the revision set is effectively part of the
+					current document.</p>
+				<p>The revision number is a unique ID and also a total ordering for versions of the
+					revision set.</p>
+				<p>creDat indicates the date and time the original revision was created.</p>
+				<p>revDat indicates the date and time the current revision was created.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="recState" type="cip:ElementStateType" use="required"/>
+		<xs:attribute name="recRevoked" type="cip:RecordRevokedFlagType" use="required"/>
+		<xs:attribute name="revision" type="cip:ElementRevisionNumberType" use="required"/>
+		<xs:attribute name="revDat" type="cip:ElementRevisionDateType" use="required"/>
+		<xs:attribute name="creDat" type="cip:ElementRevisionDateType" use="required"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="RecordIdAttributeGroupOpt">
+		<xs:annotation>
+			<xs:documentation>
+				<p>The set of attributes that identify a specific CIP element as an
+					independently-reportable unit. This group requires only the EPSID; the PEID can
+					be inherited from a parent. The group cannot identify a revision set, as it is
+					not a self-contained unique identifier when the PEID is omitted.</p>
+				<p>The rname is an optional human-readable name for the specific PEID-EPSID
+					pair.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="peid" type="common:PeidType" use="optional"/>
+		<xs:attribute name="epsid" type="common:EpsidType" use="required"/>
+		<xs:attribute name="rname" type="cip:UuidNameType" use="optional"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="RecordIdAttributeGroupReq">
+		<xs:annotation>
+			<xs:documentation>
+				<p>The set of attributes that identify a specific CIP element as an
+					independently-reportable unit, or identifying elements of a revision set. This
+					group requires both the PEID and the EPSID. The group only identifies a revision
+					set if it occurs in conjunction with the RecordStatusAttributeGroup.</p>
+				<p>The rname is an optional human-readable name for the specific PEID-EPSID
+					pair.</p>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="peid" type="common:PeidType" use="required"/>
+		<xs:attribute name="epsid" type="common:EpsidType" use="required"/>
+		<xs:attribute name="rname" type="cip:UuidNameType" use="optional"/>
+	</xs:attributeGroup>
+</xs:schema>

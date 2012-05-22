@@ -1,0 +1,31 @@
+VODDAI / SCTE ETL Integration Testing, Thursday 17-MAY-2012:
+=============================================================
+
+1.  Create the DAI_REPORTING schema to store the 10 ADS Reference Tables
+2.  Create the DAI_REPORTING_ODS schema to store 5 SCTE logging and 1 Aggregation Table
+3.  Grant SELECT on DAI_REPORTING Tables to DAI_REPORTING_ODS (used in aggregation SQL)
+4.  Update my DAI Transforms with new Database Connections information (*.kdb)
+5.  Update my DAI Transforms to ensure Schemas and Tables are idnetified correctly, both Source and Target)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+notes:
+  When I ran an "initial load" of Placement Request files, 123 records were logged as errors.  I researched 1 of these:
+  
+  	I captured a single Message ID from the error log and used "grep" to find which file or files contained that 
+  	Message ID.  grep identified the file as "placement-requests.g.2012-03-16.xml".
+  	
+  	I found the associated Message ID on line #214.
+  	
+  	The CLIENT element was missing the Terminal Address attribute, which we have as a NOT NULL field in our SCTE_REQUEST Table.

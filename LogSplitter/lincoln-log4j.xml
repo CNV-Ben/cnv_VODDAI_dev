@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <appender name="systemLog" class="org.apache.log4j.FileAppender">
+        <param name="File" value="/ads-logs/lincoln/logs/lincoln.log"/>
+        <param name="append" value="true" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%-5p] %-30.30c{3} - %m%n"/>
+        </layout>
+    </appender>
+
+    <!--
+        Logger for general informative messages from the application.
+    -->
+    <logger name="com.canoeventures.dai.lincoln">
+        <level value="info"/>
+    </logger>
+
+    <!--
+        Catch-all logger.
+    -->
+    <root>
+        <level value="warn" />
+        <appender-ref ref="systemLog" />
+    </root>
+
+</log4j:configuration>
