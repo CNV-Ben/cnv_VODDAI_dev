@@ -350,6 +350,25 @@ select unique CLIENT_DT_STRING from SCTE_REQUEST
 
 
 
+==========================================
+05/23/2012, Reporting Table design:
+
+--SCTE_RESPONSE_PLACEMENT.session_id
+SCTE_RESPONSE_PLACEMENT.tracking_id
+substr}(srp.tracking_id,1,{\cf2 instr}(srp.tracking_id,{\cf3 '-'},1)-1) as CAMPAIGN_ID
+dai_reporting.OPERATOR.company_name
+SCTE_REQUEST.adm_data
+MEDIA_ASSET_ID ---> comes from 
+OPERATOR.company_name
+SCTE_PSN.pse_event_dt_string
+SCTE_PSN.actual_asset_id
+
+
+---> SCTE_PSN.pse_event_type, spot_npt_scale, spot_npt_value
+
+
+
+
 
 
 
