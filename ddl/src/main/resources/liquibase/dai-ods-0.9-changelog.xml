@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+     <include file="dai-ods-0.9/001-jma-create_scte_request.sql" relativeToChangelogFile="true"/>
+     <include file="dai-ods-0.9/002-jma-create_scte_response.sql" relativeToChangelogFile="true"/>
+     <include file="dai-ods-0.9/003-jma-create_scte_psn.sql" relativeToChangelogFile="true"/>
+     <include file="dai-ods-0.9/005-jma-create_rpt_agg_camp_detail.sql" relativeToChangelogFile="true"/>
+     <include file="dai-ods-0.9/006-bja-add-entertainment-provider.xml" relativeToChangelogFile="true"/>
+     <include file="dai-ods-0.9/007-bja-drop-recreate-unique-constraint.xml" relativeToChangelogFile="true"/>
+</databaseChangeLog>
