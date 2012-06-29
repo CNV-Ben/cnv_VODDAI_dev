@@ -1,0 +1,373 @@
+github.com
+CanoeVentures projects
+===============================
+
+dai-etl-feeder / src / main / resources / liquibase /
+---->  dai-ods-0.9-changelog.xml
+
+
+
+<?xml version=1.0 encoding=UTF-8?>
+<databaseChangeLog
+   xmlns=http://www.liquibase.org/xml/ns/dbchangelog
+   xmlns:xsi=http://www.w3.org/2001/XMLSchema-instance
+   xsi:schemaLocation=http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd>
+      <include file=dai-ods-0.9/001-cmr-create-scte-tables.sql relativeToChangelogFile=true/>
+      <include file=dai-ods-0.9/002-cmr-create-cnv-tables.sql relativeToChangelogFile=true/>
+      <include file=dai-ods-0.9/003-cmr-create-Detail_By_Creative_Asset.sql relativeToChangelogFile=true/>
+      <include file=dai-ods-0.9/004-cmr-create-cnv-error-tables.sql relativeToChangelogFile=true/>
+</databaseChangeLog>
+
+
+
+dai-etl-feeder / src / main / resources / liquibase / dai-ods-0.9 /
+---->  001-cmr-create-scte-tables.sql
+
+--liquibase formatted sql
+
+--changeset cmr:001_1 dbms:oracle
+
+-- Comments:
+-- Create SCTE_REQUEST and SCTE_REQUEST_OPPORTUNITY tables for XML processing of PlacementRequest messages.
+--
+CREATE TABLE SCTE_REQUEST
+  ( MESSAGE_ID VARCHAR2(128 CHAR),
+    VERSION VARCHAR2(8 CHAR),
+    IDENTITY VARCHAR2(32 CHAR),
+    ADM_DATA VARCHAR2(64 CHAR),
+    TERMINAL_ADDR VARCHAR2(128 CHAR),
+    TARGET_CODE VARCHAR2(64 CHAR),
+    SESSION_ID VARCHAR2(128 CHAR),
+    SERVICE_ID VARCHAR2(32 CHAR),
+    CONTENT_PROVIDER_ID VARCHAR2(64 CHAR),
+    ENTERTAINMENT_PROVIDER_ID VARCHAR2(64 CHAR),
+    ENTERTAINMENT_ASSET_ID VARCHAR2(64 CHAR),
+    ENTERTAINMENT_DURATION VARCHAR2(32 CHAR),
+    CLIENT_DT_STRING VARCHAR2(32 CHAR),
+    LOCAL_TIMESTAMP TIMESTAMP (6) WITH TIME ZONE,
+    CREATED_BY VARCHAR2(64 CHAR),
+    CREATED_DT TIMESTAMP (6) DEFAULT systimestamp,
+    ETL_FILE_NAME VARCHAR2(255 CHAR),
+    LAST_ETL_DT TIMESTAMP (6) DEFAULT systimestamp
+  );
+
+CREATE SEQUENCE SEQ_SCTE_REQUEST_ID MINVALUE 1 MAXVALUE 999999999999999999999999999 INCREMENT BY 1 START WITH 10000 CACHE 20 NOORDER NOCYCLE ;
+
+CREATE TABLE SCTE_REQUEST_OPPORTUNITY
+  ( REQUEST_MESSAGE_ID VARCHAR2(128 CHAR),
+    OPPORTUNITY_ID VARCHAR2(96 CHAR),
+    SERVICE_REG_REF VARCHAR2(96 CHAR),
+    OPPORTUNITY_TYPE VARCHAR2(16 CHAR),
+    OPPORTUNITY_NUMBER NUMBER(3,0),
+    OPPORTUNITY_DURATION VARCHAR2(32 CHAR),
+    OPPORTUNITY_PLACEMENT_COUNT NUMBER(3,0),
+    CREATED_BY VARCHAR2(64 CHAR),
+    CREATED_DT TIMESTAMP (6),
+    ETL_FILE_NAME VARCHAR2(255 CHAR),
+    LAST_ETL_DT TIMESTAMP (6)
+  );
+
+CREATE SEQUENCE SEQ_SCTE_REQ_OPPORTUNITY_ID MINVALUE 1 MAXVALUE 999999999999999999999999999 INCREMENT BY 1 START WITH 10000 CACHE 20 NOORDER NOCYCLE ;
+
+CREATE TABLE SCTE_RESPONSE
+  ( MESSAGE_ID VARCHAR2(128 CHAR),
+    REQUEST_MESSAGE_ID VARCHAR2(128 CHAR),
+    VERSION VARCHAR2(8 CHAR),
+    IDENTITY VARCHAR2(32 CHAR),
+    STATUS_CODE_CLASS NUMBER(3,0),
+    SESSION_ID VARCHAR2(128 CHAR),
+    CREATED_BY VARCHAR2(64 CHAR),
+    CREATED_DT TIMESTAMP (6),
+    ETL_FILE_NAME VARCHAR2(320 CHAR),
+    LAST_ETL_DT TIMESTAMP (6)
+  );
+
+CREATE SEQUENCE SEQ_SCTE_RESPONSE_ID MINVALUE 1 MAXVALUE 999999999999999999999999999 INCREMENT BY 1 START WITH 10000 CACHE 20 NOORDER NOCYCLE ;
+
+CREATE TABLE SCTE_RESPONSE_PLACEMENT_DCSN
+  ( CAMPAIGN_ID NUMBER,
+    CAMPAIGN_ITEM_ID NUMBER,
+    RESPONSE_MESSAGE_ID VARCHAR2(128 CHAR),
+    REQUEST_MESSAGE_ID VARCHAR2(128 CHAR),
+    SESSION_ID VARCHAR2(128 CHAR),
+    DECISION_ID VARCHAR2(64 CHAR),
+    OPPORTUNITY_ID VARCHAR2(64 CHAR),
+    OPPORTUNITY_TYPE VARCHAR2(16 CHAR),
+    OPPORTUNITY_NUMBER NUMBER(3,0),
+    PLACEMENT_ID VARCHAR2(64 CHAR),
+    PLACEMENT_ACTION VARCHAR2(16 CHAR),
+    PLACEMENT_POS NUMBER(3,0),
+    TRACKING_ID VARCHAR2(64 CHAR),
+    TRACKING_ASSET_ID VARCHAR2(32 CHAR),
+    TRACKING_PROVIDER_ID VARCHAR2(64 CHAR),
+    CREATED_BY VARCHAR2(64 CHAR),
+    CREATED_DT TIMESTAMP (6),
+    ETL_FILE_NAME VARCHAR2(320 CHAR),
+    LAST_ETL_DT TIMESTAMP (6)
+  );
+
+CREATE SEQUENCE SEQ_SCTE_RES_PLACEMENT_ID MINVALUE 1 MAXVALUE 999999999999999999999999999 INCREMENT BY 1 START WITH 10000 CACHE 20 NOORDER NOCYCLE ;
+
+CREATE TABLE SCTE_PSN
+  ( CAMPAIGN_ID NUMBER,
+    CAMPAIGN_ITEM_ID NUMBER,
+    MESSAGE_ID VARCHAR2(128 CHAR),
+    VERSION VARCHAR2(8 CHAR),
+    PLAYDATA_IDENTITY VARCHAR2(32 CHAR),
+    PLAYDATA_SESSION_ID VARCHAR2(128 CHAR),
+    PLAYDATA_SERVICE_GROUP VARCHAR2(16 CHAR),
+    PSE_EVENT_TYPE VARCHAR2(16 CHAR),
+    PSE_STATUSCODE_CLASS NUMBER(3,0),
+    PSE_EVENT_DT_STRING VARCHAR2(32 CHAR),
+    LOCAL_TIMESTAMP TIMESTAMP (6) WITH TIME ZONE,
+    SPOT_NPT_SCALE NUMBER(3,0),
+    SPOT_NPT_VALUE NUMBER(3,0),
+    ACTUAL_TRACKING_ID VARCHAR2(64 CHAR),
+    ACTUAL_ASSET_ID VARCHAR2(64 CHAR),
+    ACTUAL_PROVIDER_ID VARCHAR2(64 CHAR),
+    CREATED_BY VARCHAR2(64 BYTE),
+    CREATED_DT TIMESTAMP (6),
+    ETL_FILE_NAME VARCHAR2(255 CHAR),
+    LAST_ETL_DT TIMESTAMP (6)
+  );
+
+CREATE SEQUENCE SEQ_SCTE_PSN_ID MINVALUE 1 MAXVALUE 999999999999999999999999999 INCREMENT BY 1 START WITH 10000 CACHE 20 NOORDER NOCYCLE ;
+
+
+=========================================================================================================================
+benaycrigg@BAycrigg-Win7 /cygdrive/c/users/benaycrigg/workspaces/dai-etl-feeder/src/main/resources/liquibase/dai-ods-0.9
+$ mvn -Pdb clean -Djdbc.drop=true liquibase:migrateSQL
+cygwin warning:
+  MS-DOS style path detected: C:\Program Files\ApacheSoftwareFoundation\apache-maven-3.0.4/boot/
+  Preferred POSIX equivalent is: /cygdrive/c/Program Files/ApacheSoftwareFoundation/apache-maven-3.0.4/boot/
+  CYGWIN environment variable option "nodosfilewarning" turns off this warning.
+  Consult the user's guide for more details about POSIX paths:
+    http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 0.159s
+[INFO] Finished at: Fri Jun 22 13:29:01 MDT 2012
+[INFO] Final Memory: 2M/122M
+[INFO] ------------------------------------------------------------------------
+[WARNING] The requested profile "db" could not be activated because it does not exist.
+[ERROR] The goal you specified requires a project to execute but there is no POM in this directory (C:\users\benaycrigg\workspaces\dai-etl-feeder\src\main\resources\liquibase\dai-ods-0.9). Please verify you invoked Maven from the correct directory. -> [Help 1]
+[ERROR]
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR]
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MissingProjectException
+=========================================================================================================================
+
+
+
+=========================================================================================================================
+benaycrigg@BAycrigg-Win7 /cygdrive/c/users/benaycrigg/workspaces/dai-etl-feeder
+$ mvn -Pdb clean -Djdbc.drop=true liquibase:migrateSQL
+[INFO] Scanning for projects...
+Downloading: http://canoe_ventures.artifactoryonline.com/canoe_ventures/libs-releases/com/canoeventures/dai/dai-super-pom/1.2.0/dai-super-pom-1.2.0.pom
+Downloading: http://canoe_ventures.artifactoryonline.com/canoe_ventures/remote-snapshot-repos/com/canoeventures/dai/dai-super-pom/1.2.0/dai-super-pom-1.2.0.pom
+
+
+
+
+
+
+
+
+
+
+
+dai-etl-feeder / pom.xml
+----------------------------
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.canoeventures.dai</groupId>
+        <artifactId>dai-super-pom</artifactId>
+        <version>1.2.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>dai-etl-feeder</artifactId>
+    <packaging>jar</packaging>
+    <properties>
+        <core.version>1.2.0</core.version>
+        <crypt.version>1.0.0-SNAPSHOT</crypt.version>
+        <project.version>1.2.0</project.version>
+        <jdbc.host>oraclehost</jdbc.host>
+        <jdbc.url>jdbc:oracle:thin:@oraclehost:1521:xe</jdbc.url>
+        <jdbc.adminuser>system</jdbc.adminuser>
+        <jdbc.adminpass>canoe</jdbc.adminpass>
+        <jdbc.drop>false</jdbc.drop>
+        <jdbc.username>dai_reporting_ods</jdbc.username>
+        <jdbc.password>dai_reporting_ods</jdbc.password>
+        <jdbc.schema>dai_reporting_ods</jdbc.schema>
+        <dai.jdbc.schema>dai_reporting_ods</dai.jdbc.schema>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.canoeventures.dai</groupId>
+            <artifactId>generated-interfaces</artifactId>
+            <version>${core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.canoeventures.crypt</groupId>
+            <artifactId>crypt-encrypter</artifactId>
+            <version>${crypt.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+        </dependency>
+        <!--
+Core utilities used by other modules.
+Define this if you use Spring Utility APIs (org.springframework.core.*/org.springframework.util.*)
+-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+        <!--
+Bean Factory and JavaBeans utilities (depends on spring-core)
+Define this if you use Spring Bean APIs (org.springframework.beans.*)
+-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+
+        <!--
+Application Context (depends on spring-core, spring-expression, spring-aop, spring-beans)
+This is the central artifact for Spring's Dependency Injection Container and is generally always defined
+-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>opensymphony</groupId>
+            <artifactId>quartz</artifactId>
+            <version>1.6.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.woodstox</groupId>
+            <artifactId>wstx-asl</artifactId>
+            <version>4.0.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.3</version>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.google.guava</groupId>-->
+            <!--<artifactId>guava</artifactId>-->
+            <!--<version>12.0</version>-->
+        <!--</dependency>-->
+
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>dai.etl.feeder.Main</mainClass>
+                                    <manifestEntries>
+                                        <Version-Number>@@VERSION_NUMBER@@</Version-Number>
+                                    </manifestEntries>
+                                </transformer>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/spring.handlers</resource>
+                                </transformer>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/spring.schemas</resource>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Add the following plugin to call package.bash -->
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>Hijack-pre-integration-to-run-post-package</id>
+                        <phase>pre-integration-test</phase>
+                        <configuration>
+                            <tasks>
+                                <exec dir="." executable="/bin/bash">
+                                    <arg value="package.bash"/>
+                                </exec>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.8</version>
+                <configuration>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

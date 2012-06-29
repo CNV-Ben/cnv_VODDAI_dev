@@ -1,0 +1,1419 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
+<style>
+      .table {
+        background-color:#F5F5FF;
+        border-left:4px solid gray;
+        border-bottom:4px solid gray;
+        border-top:4px solid gray;
+        border-right:4px solid gray;
+        margin-bottom:3em;
+        margin-left:2em;
+        margin-right:2em;
+        padding:1em;
+      }
+      .tableNameHeading h1 {
+          display: inline;
+        font-family: Segoe UI, Arial, sans-serif;
+        font-size:125%;
+        font-weight:bold;
+      }
+        
+      .tableNameHeading h2 {
+        display: inline;
+        font-family: Segoe UI, Arial, sans-serif;
+        font-size:115%;
+        font-weight:normal;
+      }
+      
+      .tableComment { 
+        background-color:#e4efff; margin-bottom:20px;
+      }
+      
+      .tableDefinition { 
+        padding:2px;
+        border-collapse:collapse;
+        margin-top:1em;
+      }
+
+      .tdTableDefinition {
+        padding-right:10px;
+        vertical-align:top;
+        border-top:1px solid #C0C0C0;
+      }
+
+      .tdLogicalColName {
+        width:20em;
+      }
+      
+      .tdPhysicalColName {
+        width:20em;
+      }
+      
+      .tdDataType {
+        width:10em;
+      }
+
+      .tdPkFlag {
+        width:4em;
+      }
+
+      .tdNullFlag {
+        width:9em;
+      }
+
+      .tdTableHeading {
+        padding:2px;
+        font-family: Segoe UI, Arial, sans-serif;
+        font-weight: bold;
+        vertical-align:top;
+        border-bottom: 1px solid #C0C0C0;
+        background-color: rgb(240,240,240);
+      }
+      
+      .subTitle {
+        font-family: Segoe UI, Arial, sans-serif;
+        font-weight: bold;
+      }
+
+      .references {
+      }
+      .comment {
+        color:#666666;
+        margin-left:3em;
+        padding:0.25em;
+      }
+    </style>
+<title>DAI_REPORTIMG</title>
+</head>
+<body>
+<center>
+<h2>DAI_REPORTIMG</h2>
+</center>
+<h3>List of tables</h3>
+<ul>
+<li>
+<a href="#AGG_CAMPAIGN_COMBINED_VW">AGG_CAMPAIGN_COMBINED_VW</a>
+</li>
+<li>
+<a href="#AGG_CAMPAIGN_DETAIL_BA">AGG_CAMPAIGN_DETAIL_BA</a>
+</li>
+<li>
+<a href="#AGG_CAMPAIGN_DETAIL_MV">AGG_CAMPAIGN_DETAIL_MV</a>
+</li>
+<li>
+<a href="#CAMPAIGN">CAMPAIGN</a>
+</li>
+<li>
+<a href="#CAMPAIGN_ITEM">CAMPAIGN_ITEM</a>
+</li>
+<li>
+<a href="#CNV_PSN_START_PLCMT_VIEWS">CNV_PSN_START_PLCMT_VIEWS</a>
+</li>
+<li>
+<a href="#CNV_PSN_START_PLCMT_VWS_ERR">CNV_PSN_START_PLCMT_VWS_ERR</a>
+</li>
+<li>
+<a href="#CNV_REQUEST">CNV_REQUEST</a>
+</li>
+<li>
+<a href="#CNV_REQUEST_ERR">CNV_REQUEST_ERR</a>
+</li>
+<li>
+<a href="#CNV_RESP_PLACEMENT_DCSN">CNV_RESP_PLACEMENT_DCSN</a>
+</li>
+<li>
+<a href="#CNV_RESP_PLCMT_DCSN_ERR">CNV_RESP_PLCMT_DCSN_ERR</a>
+</li>
+<li>
+<a href="#DetailByCreativeAsset">DetailByCreativeAsset</a>
+</li>
+<li>
+<a href="#MEDIA_ASSET">MEDIA_ASSET</a>
+</li>
+<li>
+<a href="#MEDIA_ASSET_METADATA_VALUE">MEDIA_ASSET_METADATA_VALUE</a>
+</li>
+<li>
+<a href="#NETWORK">NETWORK</a>
+</li>
+<li>
+<a href="#OPERATOR">OPERATOR</a>
+</li>
+<li>
+<a href="#PROGRAMMER">PROGRAMMER</a>
+</li>
+<li>
+<a href="#PROVIDER">PROVIDER</a>
+</li>
+<li>
+<a href="#PROVIDER_NETWORK">PROVIDER_NETWORK</a>
+</li>
+<li>
+<a href="#SCTE_PSN">SCTE_PSN</a>
+</li>
+<li>
+<a href="#SCTE_REQUEST">SCTE_REQUEST</a>
+</li>
+<li>
+<a href="#SCTE_REQUEST_OPPORTUNITY">SCTE_REQUEST_OPPORTUNITY</a>
+</li>
+<li>
+<a href="#SCTE_RESPONSE">SCTE_RESPONSE</a>
+</li>
+<li>
+<a href="#SCTE_RESPONSE_PLACEMENT_DCSN">SCTE_RESPONSE_PLACEMENT_DCSN</a>
+</li>
+<li>
+<a href="#VOD_ENDPOINT">VOD_ENDPOINT</a>
+</li>
+</ul>
+<div class="tableNameHeading">
+<h1>AGG_CAMPAIGN_COMBINED_VW<a name="AGG_CAMPAIGN_COMBINED_VW"></a>
+</h1>
+<h2>
+      (Physical Name: AGG_CAMPAIGN_COMBINED)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CAMPAIGN_ID</td><td class="tdTableDefinition">CAMPAIGN_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CAMPAIGN_ITEM_ID</td><td class="tdTableDefinition">CAMPAIGN_ITEM_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">OPERATOR</td><td class="tdTableDefinition">OPERATOR</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">SERVICE_GROUP</td><td class="tdTableDefinition">SERVICE_GROUP</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">DATE_HOUR</td><td class="tdTableDefinition">DATE_HOUR</td><td class="tdTableDefinition">TIMESTAMP</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">INSERT_COUNT</td><td class="tdTableDefinition">INSERT_COUNT</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">VIEW_COUNT</td><td class="tdTableDefinition">VIEW_COUNT</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">MEDIA_ASSET_ID</td><td class="tdTableDefinition">MEDIA_ASSET_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ASSET_IDSTRING</td><td class="tdTableDefinition">ASSET_IDSTRING</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ENTERTAINMENT_PROVIDER_ID</td><td class="tdTableDefinition">ENTERTAINMENT_PROVIDER_ID</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PLACEMENT_ID</td><td class="tdTableDefinition">PLACEMENT_ID</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>AGG_CAMPAIGN_DETAIL_BA<a name="AGG_CAMPAIGN_DETAIL_BA"></a>
+</h1>
+<h2>
+      (Physical Name: AGG_CAMPAIGN_DETAIL_BA)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CAMPAIGN_ID</td><td class="tdTableDefinition">CAMPAIGN_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CAMPAIGN_ITEM_ID</td><td class="tdTableDefinition">CAMPAIGN_ITEM_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">OPERATOR</td><td class="tdTableDefinition">OPERATOR</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">SERVICE_GROUP</td><td class="tdTableDefinition">SERVICE_GROUP</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">DATE_HOUR</td><td class="tdTableDefinition">DATE_HOUR</td><td class="tdTableDefinition">TIMESTAMP</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">INSERT_COUNT</td><td class="tdTableDefinition">INSERT_COUNT</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">VIEW_COUNT</td><td class="tdTableDefinition">VIEW_COUNT</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">MEDIA_ASSET_ID</td><td class="tdTableDefinition">MEDIA_ASSET_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ASSET_IDSTRING</td><td class="tdTableDefinition">ASSET_IDSTRING</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ENTERTAINMENT_PROVIDER_ID</td><td class="tdTableDefinition">ENTERTAINMENT_PROVIDER_ID</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PLACEMENT_ID</td><td class="tdTableDefinition">PLACEMENT_ID</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>AGG_CAMPAIGN_DETAIL_MV<a name="AGG_CAMPAIGN_DETAIL_MV"></a>
+</h1>
+<h2>
+      (Physical Name: AGG_CAMPAIGN_DETAIL_MV)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CAMPAIGN_ID</td><td class="tdTableDefinition">CAMPAIGN_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CAMPAIGN_ITEM_ID</td><td class="tdTableDefinition">CAMPAIGN_ITEM_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ACTUAL_TRACKING_ID</td><td class="tdTableDefinition">ACTUAL_TRACKING_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">OPERATOR_NAME</td><td class="tdTableDefinition">OPERATOR_NAME</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">SERVICE_GROUP</td><td class="tdTableDefinition">SERVICE_GROUP</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">DATE_HOUR</td><td class="tdTableDefinition">DATE_HOUR</td><td class="tdTableDefinition">DATE</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">TXN_DATE</td><td class="tdTableDefinition">TXN_DATE</td><td class="tdTableDefinition">TIMESTAMP</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">MEDIA_ASSET_ID</td><td class="tdTableDefinition">MEDIA_ASSET_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ASSET_IDSTRING</td><td class="tdTableDefinition">ASSET_IDSTRING</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ENTERTAINMENT_PROVIDER_ID</td><td class="tdTableDefinition">ENTERTAINMENT_PROVIDER_ID</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PLACEMENT ID</td><td class="tdTableDefinition">PLACEMENT_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>CAMPAIGN<a name="CAMPAIGN"></a>
+</h1>
+<h2>
+      (Physical Name: CAMPAIGN)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CAMPAIGN_ID</td><td class="tdTableDefinition">ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CAMPAIGN_NAME</td><td class="tdTableDefinition">CAMPAIGN_NAME</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PROGRAMMER_ID</td><td class="tdTableDefinition">PROGRAMMER_IS</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ORDER_ID</td><td class="tdTableDefinition">ORDER_ID</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">TYPE_CODE</td><td class="tdTableDefinition">TYPE_CODE</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">STATUSCODE</td><td class="tdTableDefinition">STATUSCODE</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">GOALTYPE</td><td class="tdTableDefinition">GOALTYPE</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">START_DATE</td><td class="tdTableDefinition">START_DATE</td><td class="tdTableDefinition">TIMESTAMP</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">FINAL_DATE</td><td class="tdTableDefinition">FINAL_DATE</td><td class="tdTableDefinition">TIMESTAMP</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">DESCRIPTION</td><td class="tdTableDefinition">DESCRIPTION</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>CAMPAIGN_ITEM<a name="CAMPAIGN_ITEM"></a>
+</h1>
+<h2>
+      (Physical Name: CAMPAIGN_ITEM)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CAMPAIGN_ITEM_ID</td><td class="tdTableDefinition">ITEM_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CAMPAIGN_ID</td><td class="tdTableDefinition">CAMPAIGN_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">START_DATE</td><td class="tdTableDefinition">START_DATE</td><td class="tdTableDefinition">TIMESTAMP</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">END_DATE</td><td class="tdTableDefinition">END_DATE</td><td class="tdTableDefinition">TIMESTAMP</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ACTIVE</td><td class="tdTableDefinition">ACTIVE</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">TRICKMODE</td><td class="tdTableDefinition">TROCKMODE</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CATEGORY_ID</td><td class="tdTableDefinition">CATEGORY_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CATEGORY_EXCLUSION</td><td class="tdTableDefinition">CATEGORY_EWXCLUSION</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CATEGORY_EXCLUSION_SCOPE</td><td class="tdTableDefinition">CATEGORY_EXCLUSION_SCOPE</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PRIORITY</td><td class="tdTableDefinition">PRIORITY</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">STRATEGY</td><td class="tdTableDefinition">STRATEGY</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">GOAL</td><td class="tdTableDefinition">GOAL</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>CNV_PSN_START_PLCMT_VIEWS<a name="CNV_PSN_START_PLCMT_VIEWS"></a>
+</h1>
+<h2>
+      (Physical Name: CNv_PSN_START_PLCMT_VIEWS)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PLAYDATA_SERVICE_GROUP</td><td class="tdTableDefinition">PLAYDATA_SERVICE_GROUP</td><td class="tdTableDefinition">VARCHAR(16)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CAMPAIGN_ID</td><td class="tdTableDefinition">CAMPAIGN_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CAMPAIGN_ITEM_ID</td><td class="tdTableDefinition">CAMPAIGN_ITEM_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ACTUAL_TRACKING_ID</td><td class="tdTableDefinition">ACTUAL_TRACKING_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ACTUAL_ASSET_ID</td><td class="tdTableDefinition">ACTUAL_ASSET_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ACTUAL_PROVIDER_ID</td><td class="tdTableDefinition">ACTUAL_PROVIDER_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">START_PALCEMENT_TIMESTAMP</td><td class="tdTableDefinition">START_PLACEMENT_TIMESTAMP</td><td class="tdTableDefinition">TIMESTAMP</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>CNV_PSN_START_PLCMT_VWS_ERR<a name="CNV_PSN_START_PLCMT_VWS_ERR"></a>
+</h1>
+<h2>
+      (Physical Name: CNV_PSN_START_PLCMT_VWS_ERR)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PLAYDATA_SERVICE_GROUP</td><td class="tdTableDefinition">PLAYDATA_SERVICE_GROUP</td><td class="tdTableDefinition">VARCHAR(16)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CAMPAIGN_ID</td><td class="tdTableDefinition">CAMPAIGN_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CAMPAIGN_ITEM_ID</td><td class="tdTableDefinition">CAMPAIGN_ITEM_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ACTUAL_TRACKING_ID</td><td class="tdTableDefinition">ACTUAL_TRACKING_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ACTUAL_ASSET_ID</td><td class="tdTableDefinition">ACTUAL_ASSET_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ACTUAL_PROVIDER_ID</td><td class="tdTableDefinition">ACTUAL_PROVIDER_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">START_PALCEMENT_TIMESTAMP</td><td class="tdTableDefinition">START_PLACEMENT_TIMESTAMP</td><td class="tdTableDefinition">TIMESTAMP</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ERROR_MSG</td><td class="tdTableDefinition">ERROR_MSG</td><td class="tdTableDefinition">VARCHAR(255)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>CNV_REQUEST<a name="CNV_REQUEST"></a>
+</h1>
+<h2>
+      (Physical Name: CNV_REQUEST)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">MESSAGE_ID</td><td class="tdTableDefinition">MESSAGE_ID</td><td class="tdTableDefinition">VARCHAR(128)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">IDENTITY_VOD_ENDPT_ID</td><td class="tdTableDefinition">IDENTITY_VOD_ENDPT_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ADM_DATA</td><td class="tdTableDefinition">ADM_DATA</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ENTERTAINMENT_PROVIDER_ID</td><td class="tdTableDefinition">ENTERTAINMENT_PROVIDER_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ENTERTAINMENT_ASSET_ID</td><td class="tdTableDefinition">ENTERTAINMENT_ASSET_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">RQST_DATE_TIME</td><td class="tdTableDefinition">RQST_DATE_TIME</td><td class="tdTableDefinition">TIMESTAMP</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>CNV_REQUEST_ERR<a name="CNV_REQUEST_ERR"></a>
+</h1>
+<h2>
+      (Physical Name: CNV_REQUEST_ERR)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">MessageID</td><td class="tdTableDefinition">MESSAGE_ID</td><td class="tdTableDefinition">VARCHAR(128)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">IDENTITY_VOD_ENDPT_ID</td><td class="tdTableDefinition">IDENTITY_VOD_ENDPT_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ADM_DATA</td><td class="tdTableDefinition">ADM_DATA</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ENTERTAINMENT_PROVIDER_ID</td><td class="tdTableDefinition">ENTERTAINMENT_PROVIDER_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ENTERTAINMENT_ASSET_ID</td><td class="tdTableDefinition">ENTERTAINMENT_ASSET_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">RQST_TIMESTAMP</td><td class="tdTableDefinition">RQST_TIMESTAMP</td><td class="tdTableDefinition">TIMESTAMP</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ERROR_MESSAGE</td><td class="tdTableDefinition">ERROR_MESSAGE</td><td class="tdTableDefinition">VARCHAR(300)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>CNV_RESP_PLACEMENT_DCSN<a name="CNV_RESP_PLACEMENT_DCSN"></a>
+</h1>
+<h2>
+      (Physical Name: CNV_RESP_PLACEMENT_DCSN)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">REQUEST_MESSAGE_ID</td><td class="tdTableDefinition">REQUEST_MESSAGE_ID</td><td class="tdTableDefinition">VARCHAR(128)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">OPPORTUNITY_ID</td><td class="tdTableDefinition">OPPORTUNITY_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">OPPORTUNITY_TYPE</td><td class="tdTableDefinition">OPPORTUNITY_TYPE</td><td class="tdTableDefinition">VARCHAR(16)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">OPPORTUNITY_NUMBER</td><td class="tdTableDefinition">OPPORTUNITY_NUMBER</td><td class="tdTableDefinition">SMALLINT</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PLACEMENT_ID</td><td class="tdTableDefinition">PLACEMENT_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PLACEMENT_POS</td><td class="tdTableDefinition">PLACEMENT_POS</td><td class="tdTableDefinition">SMALLINT</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CAMPAIGN_ID</td><td class="tdTableDefinition">CAMPAIGN_ID</td><td class="tdTableDefinition">NUMERIC(0,0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CAMPAIGN_ITEM_ID</td><td class="tdTableDefinition">CAMPAIGN_ITEM_ID</td><td class="tdTableDefinition">NUMERIC(0,0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">TRACKING_ID</td><td class="tdTableDefinition">TRACKING_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">TRACKING_ASSET_ID</td><td class="tdTableDefinition">TRACKING_ASSET_ID</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">TRACKING_PROVIDER_ID</td><td class="tdTableDefinition">TRACKING_PROVIDER_ID</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>CNV_RESP_PLCMT_DCSN_ERR<a name="CNV_RESP_PLCMT_DCSN_ERR"></a>
+</h1>
+<h2>
+      (Physical Name: CNV_RESP_PLCMT_DCSN_ERR)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">REQUEST_MESSAGE_ID</td><td class="tdTableDefinition">REQUEST_MESSAGE_ID</td><td class="tdTableDefinition">VARCHAR(128)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">OPPORTUNITY_ID</td><td class="tdTableDefinition">OPPORTUNITY_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">OPPORTUNITY_TYPE</td><td class="tdTableDefinition">OPPORTUNITY_TYPE</td><td class="tdTableDefinition">VARCHAR(16)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">OPPORTUNITY_NUMBER</td><td class="tdTableDefinition">OPPORTUNITY_NUMBER</td><td class="tdTableDefinition">SMALLINT</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PLACEMENT_ID</td><td class="tdTableDefinition">PLACEMENT_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PLACEMENT_POS</td><td class="tdTableDefinition">PLACEMENT_POS</td><td class="tdTableDefinition">SMALLINT</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CAMPAIGN_ID</td><td class="tdTableDefinition">CAMPAIGN_ID</td><td class="tdTableDefinition">NUMERIC(0,0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CAMPAIGN_ITEM_ID</td><td class="tdTableDefinition">CAMPAIGN_ITEM_ID</td><td class="tdTableDefinition">NUMERIC(0,0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">TRACKING_ID</td><td class="tdTableDefinition">TRACKING_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">TRACKING_ASSET_ID</td><td class="tdTableDefinition">TRACKING_ASSET_ID</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">TRACKING_PROVIDER_ID</td><td class="tdTableDefinition">TRACKING_PROVIDER_ID</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ERROR_MSG</td><td class="tdTableDefinition">ERROR_MSG</td><td class="tdTableDefinition">VARCHAR(300)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>DetailByCreativeAsset<a name="DetailByCreativeAsset"></a>
+</h1>
+<h2>
+      (Physical Name: DETAIL_BY_CREATIVE_ASSET)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ReportStartDate</td><td class="tdTableDefinition">Report_Start_Date</td><td class="tdTableDefinition">DATE</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ReportEndDate</td><td class="tdTableDefinition">Report_End_Date</td><td class="tdTableDefinition">DATE</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ReportDate</td><td class="tdTableDefinition">REPORT_DATE</td><td class="tdTableDefinition">DATE</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CampaignId</td><td class="tdTableDefinition">Campaign_Id</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CampaignExternalId</td><td class="tdTableDefinition">Campaign_External_Id</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CampaignName</td><td class="tdTableDefinition">Campaign_Name</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CampaignStartDate</td><td class="tdTableDefinition">Campaign_Start_Date</td><td class="tdTableDefinition">DATE</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CampaignEndDate</td><td class="tdTableDefinition">Campaign_End_Date</td><td class="tdTableDefinition">DATE</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ParentCompanyName</td><td class="tdTableDefinition">Parent_Company_Name</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">AdvertiserName</td><td class="tdTableDefinition">Advertiser_Name</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CampaignLineSequence</td><td class="tdTableDefinition">Campaign_Line_Sequence</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CampaignLineStatus</td><td class="tdTableDefinition">Campaign_Line_Status</td><td class="tdTableDefinition">VARCHAR(16)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CampaignLineID</td><td class="tdTableDefinition">Campaign_Line_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CampaignLineName</td><td class="tdTableDefinition">Campaign_Line_Name</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">SalesManagerName</td><td class="tdTableDefinition">Sales_Manager_Name</td><td class="tdTableDefinition">VARCHAR(132)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">SalesPerson</td><td class="tdTableDefinition">Sales_Person</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">TraffickerName</td><td class="tdTableDefinition">Trafficker_Name</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CampaignLineStartDate</td><td class="tdTableDefinition">Campaign_Line_Start_Date</td><td class="tdTableDefinition">DATE</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CampaignLineEndDate</td><td class="tdTableDefinition">Campaign_Line_End_Date</td><td class="tdTableDefinition">DATE</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CampaignLineBookedImpressionsCount</td><td class="tdTableDefinition">Campaign_Ln_Bkd_Impress_Cnt</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CampaignLineBookedRevenue</td><td class="tdTableDefinition">Campaign_Line_Booked_Rev</td><td class="tdTableDefinition">FLOAT</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">TotalFlightingDays</td><td class="tdTableDefinition">Total_Flighting_Days</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">FlightingDaysComplete</td><td class="tdTableDefinition">Flighting_Days_Compelte</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">DistributorName</td><td class="tdTableDefinition">Distributor_Name</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ContentProviderName</td><td class="tdTableDefinition">Content_Provider_Name</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">DeliveryType</td><td class="tdTableDefinition">Delivery_Type</td><td class="tdTableDefinition">VARCHAR(16)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PriorityType</td><td class="tdTableDefinition">Priority_Type</td><td class="tdTableDefinition">VARCHAR(16)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PriorityLevel</td><td class="tdTableDefinition">Priority_Level</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">FrequencyCapAmount</td><td class="tdTableDefinition">Frequency_Cap_Amount</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">FrequencyCapInterval</td><td class="tdTableDefinition">Frequency_Cap_Interval</td><td class="tdTableDefinition">VARCHAR(16)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">Metering</td><td class="tdTableDefinition">Metering</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">TargetingDesc</td><td class="tdTableDefinition">Targeting_Desc</td><td class="tdTableDefinition">VARCHAR(128)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">TitleProviderName</td><td class="tdTableDefinition">Title_Provider_Name</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">MusicProviderName</td><td class="tdTableDefinition">Music_Provider_Name</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PackageProviderName</td><td class="tdTableDefinition">Package_Provider_Name</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">TitleAssetID</td><td class="tdTableDefinition">Tittle_Asset_ID</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">MovieAssetId</td><td class="tdTableDefinition">Movie_Asset_ID</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PackageAssetId</td><td class="tdTableDefinition">Package_Asset_Id</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">TitleTitleId</td><td class="tdTableDefinition">Title_Title_Id</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">AdProductId</td><td class="tdTableDefinition">Ad_Product_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">AdProductName</td><td class="tdTableDefinition">Ad_Product_Name</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">AdPackageId</td><td class="tdTableDefinition">Ad_Package_Id</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">AdPackagename</td><td class="tdTableDefinition">Ad_Package_Name</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">AdPackagePosition</td><td class="tdTableDefinition">Ad_Package_Position</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">AdUnitId</td><td class="tdTableDefinition">Ad_Unit_Id</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">AdUnitName</td><td class="tdTableDefinition">Ad_Unit_Name</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">TargetPrice</td><td class="tdTableDefinition">Target_Price</td><td class="tdTableDefinition">FLOAT</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">FloorProce</td><td class="tdTableDefinition">Floor_Price</td><td class="tdTableDefinition">FLOAT</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PricingType</td><td class="tdTableDefinition">Pricing_Type</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">Price</td><td class="tdTableDefinition">PRICE</td><td class="tdTableDefinition">FLOAT</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">BookedImpressionCount</td><td class="tdTableDefinition">Booked_Impression_Count</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">BookedRevenue</td><td class="tdTableDefinition">Booked_Revenue</td><td class="tdTableDefinition">FLOAT</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">AdDecisionCount</td><td class="tdTableDefinition">Ad_Decision_Count</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ActualImpressionCount</td><td class="tdTableDefinition">Actual_Impression_Count</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ActualClicks</td><td class="tdTableDefinition">Actual_Clicks</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CTR</td><td class="tdTableDefinition">CTR</td><td class="tdTableDefinition">FLOAT</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>MEDIA_ASSET<a name="MEDIA_ASSET"></a>
+</h1>
+<h2>
+      (Physical Name: MEDIA_ASSET)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">MEDIA_ASSET_ID</td><td class="tdTableDefinition">ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ASSET_IDSTRING</td><td class="tdTableDefinition">ASSET_IDSTRING</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PROVIDER_ID</td><td class="tdTableDefinition">PROVIDER_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">MEDIA_ASSET_TYPE</td><td class="tdTableDefinition">MEDIA_ASSET_TYPE</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">SEPARATION</td><td class="tdTableDefinition">SEPARATION</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">DURATION</td><td class="tdTableDefinition">DURATION</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ISCI</td><td class="tdTableDefinition">ISCI</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">AD_ID</td><td class="tdTableDefinition">AD_ID</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">VIDEO_DEF</td><td class="tdTableDefinition">VIDEO_DEF</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>MEDIA_ASSET_METADATA_VALUE<a name="MEDIA_ASSET_METADATA_VALUE"></a>
+</h1>
+<h2>
+      (Physical Name: MEDIA_ASSET_METADATA_VALUE)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">MEDIA_ASSET_METADATA_VALUE_ID</td><td class="tdTableDefinition">ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">MEDIA_ASSET_ID</td><td class="tdTableDefinition">MEDIA_ASSET_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">METADATA_FIELD_ID</td><td class="tdTableDefinition">METADATA_FIELD_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">VALUE</td><td class="tdTableDefinition">VALUE</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">AGENT_NAME</td><td class="tdTableDefinition">AGENT_NAME</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">AGENT_SOURCE</td><td class="tdTableDefinition">AGENT_SOURCE</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>NETWORK<a name="NETWORK"></a>
+</h1>
+<h2>
+      (Physical Name: NETWORK)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">NETWORK_ID</td><td class="tdTableDefinition">ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PROGRAMMER_ID</td><td class="tdTableDefinition">PROGRAMMER_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">NETWORK_NAME</td><td class="tdTableDefinition">NETWORK_NAME</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>OPERATOR<a name="OPERATOR"></a>
+</h1>
+<h2>
+      (Physical Name: OPERATOR)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">OPERATOR_ID</td><td class="tdTableDefinition">ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">COMPANY_NAME</td><td class="tdTableDefinition">COMPANY_NAME</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>PROGRAMMER<a name="PROGRAMMER"></a>
+</h1>
+<h2>
+      (Physical Name: PROGRAMMER)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PROGRAMMER_ID</td><td class="tdTableDefinition">PROGRAMMER_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PROGRAMMER_NAME</td><td class="tdTableDefinition">PROGRAMMER_NAME</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PROGRAMMER_SHORT_NAME</td><td class="tdTableDefinition">PROGRAMMER_SHORT_NAME</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>PROVIDER<a name="PROVIDER"></a>
+</h1>
+<h2>
+      (Physical Name: PROVIDER)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PROVIDER_ID</td><td class="tdTableDefinition">PROVIDER_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ACTIVE</td><td class="tdTableDefinition">ACTIVE</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>PROVIDER_NETWORK<a name="PROVIDER_NETWORK"></a>
+</h1>
+<h2>
+      (Physical Name: PROVIDER_NETWORK)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PROVIDER_ID</td><td class="tdTableDefinition">PROVIDER_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">NETWORK_ID</td><td class="tdTableDefinition">NETWORK_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>SCTE_PSN<a name="SCTE_PSN"></a>
+</h1>
+<h2>
+      (Physical Name: SCTE_PSN)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">SCTE_PSN_ID</td><td class="tdTableDefinition">ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CAMPAIGN_ID</td><td class="tdTableDefinition">CAMPAIGN_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CAMPAIGN_ITEM_ID</td><td class="tdTableDefinition">CAMPAIGN_ITEM_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">MESSAGE_ID</td><td class="tdTableDefinition">MESSAGE_ID</td><td class="tdTableDefinition">VARCHAR(128)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">VERSION</td><td class="tdTableDefinition">VERSION</td><td class="tdTableDefinition">VARCHAR(8)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PLAYDATA_IDENTITY</td><td class="tdTableDefinition">PLAYDATA_IDENTITY</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PLAYDATA_SESSION_ID</td><td class="tdTableDefinition">PLAYDATA_SESSION_ID</td><td class="tdTableDefinition">VARCHAR(128)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PLAYDATA_SERVICE_GROUP</td><td class="tdTableDefinition">PLAYDATA_SERVICE_GROUP</td><td class="tdTableDefinition">VARCHAR(16)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PSE_EVENT_TYPE</td><td class="tdTableDefinition">PSE_EVENT_TYPE</td><td class="tdTableDefinition">VARCHAR(16)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PSE_STATUSCODE_CLASS</td><td class="tdTableDefinition">PSE_STATUSCODE_CLASS</td><td class="tdTableDefinition">SMALLINT</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PSE_EVENT_DT_STRING</td><td class="tdTableDefinition">PSE_EVENT_DT_STRING</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">LOCAL_TIMESTAMP</td><td class="tdTableDefinition">LOCAL_TIMESTAMP</td><td class="tdTableDefinition">TIMESTAMP</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">SPOT_NPT_SCALE</td><td class="tdTableDefinition">SPOT_NPT_SCALE</td><td class="tdTableDefinition">SMALLINT</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">SPOT_NPT_VALUE</td><td class="tdTableDefinition">SPOT_NPT_VALUE</td><td class="tdTableDefinition">SMALLINT</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ACTUAL_TRACKING_ID</td><td class="tdTableDefinition">ACTUAL_TRACKING_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ACTUAL_ASSET_ID</td><td class="tdTableDefinition">ACTUAL_ASSET_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ACTUAL_PROVIDER_ID</td><td class="tdTableDefinition">ACTUAL_PROVIDER_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CREATED_BY</td><td class="tdTableDefinition">CREATED_BY</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CREATED_DT</td><td class="tdTableDefinition">CREATED_DT</td><td class="tdTableDefinition">TIMESTAMP</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ETL_FILE_NAME</td><td class="tdTableDefinition">ETL_FILE_NAME</td><td class="tdTableDefinition">VARCHAR(255)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">LAST_ETL_DT</td><td class="tdTableDefinition">LAST_ETL_DT</td><td class="tdTableDefinition">TIMESTAMP</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>SCTE_REQUEST<a name="SCTE_REQUEST"></a>
+</h1>
+<h2>
+      (Physical Name: SCTE_REQUEST)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">SCTE_REQUEST_ID</td><td class="tdTableDefinition">ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">MESSAGE_ID</td><td class="tdTableDefinition">MESSAGE_ID</td><td class="tdTableDefinition">VARCHAR(128)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">VERSION</td><td class="tdTableDefinition">VERSION</td><td class="tdTableDefinition">VARCHAR(8)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ADM_DATA</td><td class="tdTableDefinition">ADM_DATA</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">TERMINAL_ADDR</td><td class="tdTableDefinition">TERMINAL_ADDR</td><td class="tdTableDefinition">VARCHAR(128)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">TARGET_CODE</td><td class="tdTableDefinition">TARGET_CODE</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">SESSION_ID</td><td class="tdTableDefinition">SESSION_ID</td><td class="tdTableDefinition">VARCHAR(128)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">SERVICE_ID</td><td class="tdTableDefinition">SERVICE_ID</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CONTENT_PROVIDER_ID</td><td class="tdTableDefinition">CONTENT_PROVIDER_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ENTERTAINMENT_PROVIDER_ID</td><td class="tdTableDefinition">ENTERTAINMENT_PROVIDER_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ENTERTAINMENT_ASSET_ID</td><td class="tdTableDefinition">ENTERTAINMENT_ASSET_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ENTERTAINMENT_DURATION</td><td class="tdTableDefinition">ENTERTAINMENT_DURATION</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CLIENT_DT_STRING</td><td class="tdTableDefinition">CLIENT_DT_STRING</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">LOCAL_TIMESTAMP</td><td class="tdTableDefinition">LOCAL_TIMESTAMP</td><td class="tdTableDefinition">TIMESTAMP</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CREATED_BY</td><td class="tdTableDefinition">CREATED_BY</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CREATED_DT</td><td class="tdTableDefinition">CREATED_DT</td><td class="tdTableDefinition">TIMESTAMP</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ETL_FILE_NAME</td><td class="tdTableDefinition">ETL_FILE_NAME</td><td class="tdTableDefinition">VARCHAR(255)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">LAST_ETL_DATE</td><td class="tdTableDefinition">LAST_ETL_DATE</td><td class="tdTableDefinition">TIMESTAMP</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>SCTE_REQUEST_OPPORTUNITY<a name="SCTE_REQUEST_OPPORTUNITY"></a>
+</h1>
+<h2>
+      (Physical Name: SCTE_REQUEST_OPPORTUNITY)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">SCTE_REQUEST_OPPORTUNITIES_ID</td><td class="tdTableDefinition">SCTE_REQUEST_OPPORTUNITIES_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">REQUEST_MESSAGE_ID</td><td class="tdTableDefinition">REQUEST_MESSAGE_ID</td><td class="tdTableDefinition">VARCHAR(132)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">OPPORTUNITY_ID</td><td class="tdTableDefinition">OPPORTUNITY_ID</td><td class="tdTableDefinition">VARCHAR(96)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">SERVICE_REG_REF</td><td class="tdTableDefinition">SERVICE_REG_REF</td><td class="tdTableDefinition">VARCHAR(96)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">OPPORTUNITY_TYPE</td><td class="tdTableDefinition">OPPORTUNITY_TYPE</td><td class="tdTableDefinition">VARCHAR(16)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">OPPORTUNITY_NUMBER</td><td class="tdTableDefinition">OPPORTUNITY_NUMBER</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">OPPORTUNITY_DURATION</td><td class="tdTableDefinition">OPPORTUNITY_DURATION</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">OPPORTUNITY_PLACEMENT_COUNT</td><td class="tdTableDefinition">OPPORTUNITY_PLACEMENT_COUNT</td><td class="tdTableDefinition">SMALLINT</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CREATED_BY</td><td class="tdTableDefinition">CREATED_BY</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CREATED_DT</td><td class="tdTableDefinition">CREATED_DT</td><td class="tdTableDefinition">TIMESTAMP</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ETL_FILE_NAME</td><td class="tdTableDefinition">ETL_FILE_NAME</td><td class="tdTableDefinition">VARCHAR(255)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">LAST_ETL_DT</td><td class="tdTableDefinition">LAST_ETL_DT</td><td class="tdTableDefinition">TIMESTAMP</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>SCTE_RESPONSE<a name="SCTE_RESPONSE"></a>
+</h1>
+<h2>
+      (Physical Name: SCTE_RESPONSE)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ID</td><td class="tdTableDefinition">SCTE_RESPONSE_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">MESSAGE_ID</td><td class="tdTableDefinition">MESSAGE_ID</td><td class="tdTableDefinition">VARCHAR(128)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">REQUEST_MESSAGE_ID</td><td class="tdTableDefinition">REQUEST_MESSAGE_ID</td><td class="tdTableDefinition">VARCHAR(128)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">VERSION</td><td class="tdTableDefinition">VERSION</td><td class="tdTableDefinition">VARCHAR(8)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">IDENTITY</td><td class="tdTableDefinition">IDENTITY</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">STATUS_CODE_CLASS</td><td class="tdTableDefinition">STATUS_CODE_CLASS</td><td class="tdTableDefinition">SMALLINT</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">SESSION_ID</td><td class="tdTableDefinition">SESSION_ID</td><td class="tdTableDefinition">VARCHAR(128)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CREATED_BY</td><td class="tdTableDefinition">CREATED_BY</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CREATED_DT</td><td class="tdTableDefinition">CREATED_DT</td><td class="tdTableDefinition">TIMESTAMP</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ETL_FILENAME</td><td class="tdTableDefinition">ETL_FILENAME</td><td class="tdTableDefinition">VARCHAR(255)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">LAST_ETL_DT</td><td class="tdTableDefinition">LAST_ETL_DT</td><td class="tdTableDefinition">TIMESTAMP</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>SCTE_RESPONSE_PLACEMENT_DCSN<a name="SCTE_RESPONSE_PLACEMENT_DCSN"></a>
+</h1>
+<h2>
+      (Physical Name: SCTE_RESPONSE_PLACEMENT_DCSN)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ID</td><td class="tdTableDefinition">SCTE_RESPONSE_PLCMT_DCSN_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CAMPAIGN_ID</td><td class="tdTableDefinition">CAMPAIGN_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CAMPAIGN_ITEM_ID</td><td class="tdTableDefinition">CAMPAIGN_ITEM_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">RESPONSE_MESSAGE_ID</td><td class="tdTableDefinition">RESPONSE_MESSAGE_ID</td><td class="tdTableDefinition">VARCHAR(128)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">REQUEST_MESSAGE_ID</td><td class="tdTableDefinition">REQUEST_MESSAGE_ID</td><td class="tdTableDefinition">VARCHAR(128)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">SESSION_ID</td><td class="tdTableDefinition">SESSION_ID</td><td class="tdTableDefinition">VARCHAR(128)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">DECISION_ID</td><td class="tdTableDefinition">DECISION_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">OPPORTUNITY_ID</td><td class="tdTableDefinition">OPPORTUNITY_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">OPPORTUNITY_TYPE</td><td class="tdTableDefinition">OPPORTUNITY_TYPE</td><td class="tdTableDefinition">VARCHAR(16)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">OPPORTUNITY_NUMBER</td><td class="tdTableDefinition">OPPORTUNITY_NUMBER</td><td class="tdTableDefinition">SMALLINT</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PLACEMENT_ID</td><td class="tdTableDefinition">PLACEMENT_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PLACEMENT_ACTION</td><td class="tdTableDefinition">PLACEMENT_ACTION</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PLACEMENT_POS</td><td class="tdTableDefinition">PLACEMENT_POS</td><td class="tdTableDefinition">SMALLINT</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">TRACKING_ID</td><td class="tdTableDefinition">TRACKING_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">TRACKING_ASSET_ID</td><td class="tdTableDefinition">TRACKING_ASSET_ID</td><td class="tdTableDefinition">VARCHAR(32)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">TRACKING_PROVIDER_ID</td><td class="tdTableDefinition">TRACKING_PROVIDER_ID</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CREATED_BY</td><td class="tdTableDefinition">CREATED_BY</td><td class="tdTableDefinition">VARCHAR(64)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">CREATED_DT</td><td class="tdTableDefinition">CREATED_DT</td><td class="tdTableDefinition">TIMESTAMP</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ETL_FILE_NAME</td><td class="tdTableDefinition">ETL_FILE_NAME</td><td class="tdTableDefinition">VARCHAR(320)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">LAST_ETL_DT</td><td class="tdTableDefinition">LAST_ETL_DT</td><td class="tdTableDefinition">TIMESTAMP</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap></td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+<div class="tableNameHeading">
+<h1>VOD_ENDPOINT<a name="VOD_ENDPOINT"></a>
+</h1>
+<h2>
+      (Physical Name: VOD_ENDPOINT)
+      </h2>
+</div>
+<div class="table">
+<table class="tableDefinition" width="100%">
+<tr>
+<td class="tdTableHeading tdLogicalColName">Logical Column Name</td><td class="tdTableHeading tdPhysicalColName">Physical Column Name</td><td class="tdTableHeading tdDataType">Type</td><td class="tdTableHeading tdPkFlag">PK</td><td class="tdTableHeading tdNullFlag">Nullable</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">VOD_ENDPOINT_ID</td><td class="tdTableDefinition">ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">VOD_ENDPOINT_URL</td><td class="tdTableDefinition">VOD_ENDPOINT_URL</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">IDENTITY</td><td class="tdTableDefinition">IDENTITY</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">OPERATOR_ID</td><td class="tdTableDefinition">OPERATOR_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">ACTIVE</td><td class="tdTableDefinition">ACTIVE</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">TYPE_DESCRIMINATOR</td><td class="tdTableDefinition">TYPE_DESCRIMINATOR</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">STATUS_CHECK_TYPE</td><td class="tdTableDefinition">STATUS_CHECK_TYPE</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">OPERATOR_CIS_ID</td><td class="tdTableDefinition">OPERATOR_CIS_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">NAME_QUALIFIER</td><td class="tdTableDefinition">NAME_QUALIFIER</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">SERVICE_NAME</td><td class="tdTableDefinition">SERVICE_NAME</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PORT_NAME</td><td class="tdTableDefinition">PORT_NAME</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">AUTH</td><td class="tdTableDefinition">AUTH</td><td class="tdTableDefinition">VARCHAR(0)</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PARENT_ADM_ID</td><td class="tdTableDefinition">PARENT_ADM_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PLACEMENT_ADSENDPOINT_ID</td><td class="tdTableDefinition">PLACEMENT_ADSENDPOINT_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">PSN_ADSENDPOINT_ID</td><td class="tdTableDefinition">PSN_ADSENDPOINT_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">DEREG_ADSENDPOINT_ID</td><td class="tdTableDefinition">DEREG_ADSENDPOINT_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">SSN_ADSENDPOINT_ID</td><td class="tdTableDefinition">SSN_ADSENDPOINT_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">DEFAULT_ADSENDPOINT_ID</td><td class="tdTableDefinition">DEFAULT_ADSENDPOINT_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+<tr valign="top">
+<td class="tdTableDefinition">SCR_ADSENDPOINT_ID</td><td class="tdTableDefinition">SCR_ADSENDPOINT_ID</td><td class="tdTableDefinition">INTEGER</td><td class="tdTableDefinition" nowrap></td><td class="tdTableDefinition" nowrap>NOT NULL</td>
+</tr>
+</table>
+<div class="references"></div>
+</div>
+</body>
+</html>
